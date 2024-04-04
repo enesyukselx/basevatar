@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import srcIntroImg1 from "../assets/img/intro-img-4.png";
 
 const Mint = () => {
+    const endDate = new Date("2024-04-04T14:59:59Z");
+    const now = new Date();
+    let timeDifference = endDate.getTime() - now.getTime() < 0 ? 0 : endDate.getTime() - now.getTime();
+
     const [countdown, setCountdown] = useState({
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
+        hours: Math.floor(timeDifference / (1000 * 60 * 60)),
+        minutes: Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((timeDifference % (1000 * 60)) / 1000),
     });
 
     useEffect(() => {
-        const endDate = new Date("2024-04-04T15:59:59Z");
         const interval = setInterval(() => {
-            const now = new Date();
-            const timeDifference = endDate.getTime() - now.getTime();
-
+            timeDifference = timeDifference - 1000;
             if (timeDifference > 0) {
                 const hours = Math.floor(timeDifference / (1000 * 60 * 60));
                 const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
