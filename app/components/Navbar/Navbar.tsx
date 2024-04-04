@@ -1,9 +1,11 @@
-import { Link } from "@remix-run/react";
+"use client";
+
 import classes from "./Navbar.module.scss";
 import { LucideMenu } from "lucide-react";
 import { useRef } from "react";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
+import Link from "next/link";
 
 const Navbar = () => {
     //
@@ -17,7 +19,7 @@ const Navbar = () => {
             <div className="container">
                 <div className="md:flex justify-between items-center">
                     <div className={classes.logo}>
-                        <Link to="/">
+                        <Link href="/">
                             <span className="font-bold text-blue-200">BASE</span>VATAR
                         </Link>
                         <button
@@ -31,22 +33,22 @@ const Navbar = () => {
                     <div ref={menuRef} className={classes.menu}>
                         <ul>
                             <li>
-                                <Link to="/gallery" className="hover:text-blue-100">
+                                <Link href="/gallery" className="hover:text-blue-100">
                                     Gallery
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/mint" className="hover:text-blue-100">
+                                <Link href="/mint" className="hover:text-blue-100">
                                     Mint
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/vote" className="hover:text-blue-100">
+                                <Link href="/vote" className="hover:text-blue-100">
                                     Vote
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/faq" className="hover:text-blue-100">
+                                <Link href="/faq" className="hover:text-blue-100">
                                     FAQ
                                 </Link>
                             </li>

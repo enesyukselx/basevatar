@@ -1,10 +1,11 @@
-import { Link } from "@remix-run/react";
-import srcIntroImg1 from "../assets/img/intro-img-1.png";
-import srcIntroImg2 from "../assets/img/intro-img-2.png";
-import srcIntroImg3 from "../assets/img/intro-img-3.png";
-import srcIntroImg4 from "../assets/img/intro-img-4.png";
+import Image from "next/image";
+import Link from "next/link";
+import srcIntroImg1 from "./assets/img/intro-img-1.png";
+import srcIntroImg2 from "./assets/img/intro-img-2.png";
+import srcIntroImg3 from "./assets/img/intro-img-3.png";
+import srcIntroImg4 from "./assets/img/intro-img-4.png";
 
-const Index = () => {
+export default function Home() {
     return (
         <section className="section-intro">
             <div className="container">
@@ -22,22 +23,20 @@ const Index = () => {
                         </p>
 
                         <div className="mt-8 links">
-                            <Link to="/draw">Start Drawing</Link>
-                            <Link to="/earn">Earn Points</Link>
+                            <Link href="/draw">Start Drawing</Link>
+                            <Link href="/earn">Earn Points</Link>
                         </div>
                     </div>
                     <div className="lg:col-6">
                         <div className="images">
-                            <img src={srcIntroImg1} alt="" />
-                            <img src={srcIntroImg2} alt="" />
-                            <img src={srcIntroImg3} alt="" />
-                            <img src={srcIntroImg4} alt="" />
+                            <Image src={srcIntroImg1} alt="" />
+                            <Image src={srcIntroImg2} alt="" />
+                            <Image src={srcIntroImg3} alt="" />
+                            <Image src={srcIntroImg4} alt="" />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     );
-};
-
-export default Index;
+}
