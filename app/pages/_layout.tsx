@@ -1,13 +1,25 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import type { ReactNode } from "react";
 import Navbar from "~/components/Navbar/Navbar";
+import "../assets/scss/layout.scss";
+//
+import Web3ModalProvider from "../context/wagmi";
+import { cookieToInitialState } from "wagmi";
+import { config } from "../config/wagmi";
+//
+
+import { json, LoaderFunctionArgs } from "@remix-run/node";
+
+export async function loader({ request }: LoaderFunctionArgs) {
+    if (!request.headers) return;
+    const cookieHeader = request.headers.get("cookie");
+    return json({ cookieHeader });
+}
 
 export const meta: MetaFunction = () => {
     return [{ title: "Basevatar" }, { name: "description", content: "Welcome to Basevatar!" }];
 };
-
-import "../assets/scss/layout.scss";
 
 const Layout = ({ children }: { children: ReactNode }) => {
     return (
@@ -21,10 +33,15 @@ const Layout = ({ children }: { children: ReactNode }) => {
 };
 
 const LayoutWithOutlet = () => {
+    const { cookieHeader } = useLoaderData<typeof loader>();
+    const initialState = cookieToInitialState(config, cookieHeader);
+
     return (
-        <Layout>
-            <Outlet />
-        </Layout>
+        <Web3ModalProvider initialState={initialState}>
+            <Layout>
+                <Outlet />
+            </Layout>
+        </Web3ModalProvider>
     );
 };
 

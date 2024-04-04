@@ -2,8 +2,14 @@ import { Link } from "@remix-run/react";
 import classes from "./Navbar.module.scss";
 import { LucideMenu } from "lucide-react";
 import { useRef } from "react";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { useAccount } from "wagmi";
 
 const Navbar = () => {
+    //
+    const { open } = useWeb3Modal();
+    const { address, isConnected } = useAccount();
+    //
     const menuRef = useRef<HTMLDivElement>(null);
 
     return (
@@ -45,8 +51,17 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <button className="border-2 border-white py-2 px-2 hover:bg-white hover:text-black">
-                                    CONNECT WALLET
+                                <button
+                                    onClick={() => open()}
+                                    className={`border-2 py-2 px-2 ${
+                                        isConnected
+                                            ? "bg-white text-black hover:bg-gray-200"
+                                            : "bg-black text-white hover:bg-white hover:text-black"
+                                    } border-white `}
+                                >
+                                    {isConnected
+                                        ? address && `${address.slice(0, 4)}...${address.slice(-4)}`
+                                        : "CONNECT WALLET"}
                                 </button>
                             </li>
                         </ul>
