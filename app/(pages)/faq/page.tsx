@@ -1,29 +1,13 @@
 import Faq from "../../components/Faq/Faq";
+import { prisma } from "@/app/db";
 
-const FAQ_CONTENT = [
-    {
-        title: "What is Lorem Ipsum?",
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, exercitationem deserunt nemo ab praesentium.",
-    },
-    {
-        title: "Why do we use it?",
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, sit. Maiores cumque sint placeat recusandae odit! Harum consequuntur nesciunt exercitationem corrupti distinctio, cumque animi molestias, quis minima asperiores possimus? Officia!",
-    },
-    {
-        title: "Where does it come from?",
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, exercitationem deserunt nemo ab praesentium.",
-    },
-    {
-        title: "Where can I get some?",
-        content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, exercitationem deserunt nemo ab praesentium.",
-    },
-];
+const Page = async () => {
+    const items = await prisma.faq.findMany({
+        orderBy: {
+            order: "asc",
+        },
+    });
 
-const Page = () => {
     return (
         <section className="py-8">
             <div className="container">
@@ -36,7 +20,7 @@ const Page = () => {
                         </p>
                     </div>
 
-                    <Faq data={FAQ_CONTENT} />
+                    <Faq data={items} />
                 </div>
             </div>
         </section>

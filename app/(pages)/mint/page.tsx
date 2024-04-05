@@ -3,16 +3,32 @@ import Image from "next/image";
 import srcIntroImg1 from "@/app/assets/img/intro-img-4.png";
 import CountDown from "./components/CountDown";
 
-const Page = () => {
+import { prisma } from "@/app/db";
+
+const Page = async () => {
+    const currDate = new Date();
+
+    const item = await prisma.gallery.findFirst({
+        orderBy: {
+            created_at: "desc",
+        },
+    });
+
     return (
         <section className="section-mint">
             <div className="container">
                 <div className="row flex-wrap-reverse gap-y-8 md:gap-y-0">
                     <div className="md:col-6">
-                        <Image src={srcIntroImg1} alt="intro-img-1" className="rounded" />
+                        <Image
+                            src={item?.image_url || ""}
+                            width={500}
+                            height={250}
+                            alt="intro-img-1"
+                            className="rounded"
+                        />
                     </div>
                     <div className="md:col-6 mint">
-                        <h3 className="mint-title">DAY #1: The Dinasour</h3>
+                        <h3 className="mint-title">{item?.title}</h3>
                         <div className="color-palette">
                             <div className="color" style={{ backgroundColor: "#FFD700" }}></div>
                             <div className="color" style={{ backgroundColor: "#FFA500" }}></div>
@@ -20,7 +36,7 @@ const Page = () => {
                             <div className="color" style={{ backgroundColor: "#FF4500" }}></div>
                             <div className="color" style={{ backgroundColor: "#FF0000" }}></div>
                         </div>
-                        <CountDown />
+                        <CountDown currDate={currDate} date={item?.end_date || ""} />
                         <div className="contributors">
                             <div className="title">Contributors</div>
                             <p>

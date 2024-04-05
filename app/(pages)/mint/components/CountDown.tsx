@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const CountDown = () => {
-    const endDate = new Date("2024-04-06T14:59:59Z");
-    const now = new Date();
+const CountDown = ({ currDate, date }: { currDate: Date; date: string }) => {
+    const endDate = new Date(date);
+    const now = currDate;
     let timeDifference = endDate.getTime() - now.getTime() < 0 ? 0 : endDate.getTime() - now.getTime();
 
     const [countdown, setCountdown] = useState({

@@ -10,7 +10,7 @@ const Page = async () => {
 
     const items = await prisma.gallery.findMany({
         orderBy: {
-            end_date: "desc",
+            created_at: "desc",
         },
     });
 
@@ -37,7 +37,7 @@ const Page = async () => {
                                     </div>
                                 </div>
                                 <div className="button">
-                                    {item.end_date < currDate ? (
+                                    {new Date(item.end_date) < currDate ? (
                                         <Link href={item.opensea_url}>BUY</Link>
                                     ) : (
                                         <Link href="" className="mint-btn">
