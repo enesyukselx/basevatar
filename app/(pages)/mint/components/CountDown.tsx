@@ -7,6 +7,7 @@ const CountDown = ({ currDate, date }: { currDate: Date; date: string }) => {
     const now = currDate;
     const timeDifference = useRef(endDate.getTime() - now.getTime() < 0 ? 0 : endDate.getTime() - now.getTime());
 
+
     const [countdown, setCountdown] = useState({
         hours: Math.floor(timeDifference.current / (1000 * 60 * 60)),
         minutes: Math.floor((timeDifference.current % (1000 * 60 * 60)) / (1000 * 60)),
