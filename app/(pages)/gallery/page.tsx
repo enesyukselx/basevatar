@@ -1,13 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import srcIntroImg1 from "@/app/assets/img/intro-img-1.png";
-import srcIntroImg2 from "@/app/assets/img/intro-img-2.png";
-import srcIntroImg3 from "@/app/assets/img/intro-img-3.png";
-import srcIntroImg4 from "@/app/assets/img/intro-img-4.png";
 import { LucideDownload, LucideSailboat } from "lucide-react";
 
-const Page = () => {
+import { prisma } from "@/app/db";
+
+const Page = async () => {
+    const currDate = new Date();
+
+    const items = await prisma.gallery.findMany({
+        orderBy: {
+            end_date: "desc",
+        },
+    });
+
     return (
         <section className="section-gallery">
             <div className="container">
@@ -17,118 +23,40 @@ const Page = () => {
                         <p className="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                     <div className="gallery">
-                        <div className="item">
-                            <div className="image">
-                                <Image src={srcIntroImg1} alt="" />
-                            </div>
-                            <div className="title">
-                                <h6>Day #234: Easter Egg Hunt</h6>
-                                <div className="color-palette">
-                                    <div className="color" style={{ backgroundColor: "#FFD700" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FFA500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF6347" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF4500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF0000" }}></div>
+                        {items.map((item) => (
+                            <div className="item" key={item.id}>
+                                <div className="image">
+                                    <Image src={item.image_url} alt="" layout="responsive" width={900} height={600} />
+                                </div>
+                                <div className="title">
+                                    <h6>{item.title}</h6>
+                                    <div className="color-palette">
+                                        {item.colors.map((color, index) => (
+                                            <div className="color" style={{ backgroundColor: color }} key={index}></div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="button">
+                                    {item.end_date < currDate ? (
+                                        <Link href={item.opensea_url}>BUY</Link>
+                                    ) : (
+                                        <Link href="" className="mint-btn">
+                                            MINT
+                                        </Link>
+                                    )}
+                                </div>
+                                <div className="links">
+                                    <Link href={item.image_url} target="_blank">
+                                        <LucideDownload size={16} />
+                                        Download
+                                    </Link>
+                                    <Link href={item.opensea_url} target="_blank">
+                                        <LucideSailboat size={16} />
+                                        View on Opensea
+                                    </Link>
                                 </div>
                             </div>
-                            <div className="button">
-                                <Link href="/">BUY 0.001 ETH</Link>
-                            </div>
-                            <div className="links">
-                                <Link href="/">
-                                    <LucideDownload size={16} />
-                                    Download
-                                </Link>
-                                <Link href="/">
-                                    <LucideSailboat size={16} />
-                                    View on Opensea
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <Image src={srcIntroImg2} alt="" />
-                            </div>
-                            <div className="title">
-                                <h6>Day #234: Easter Egg Hunt</h6>
-                                <div className="color-palette">
-                                    <div className="color" style={{ backgroundColor: "#FFD700" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FFA500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF6347" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF4500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF0000" }}></div>
-                                </div>
-                            </div>
-                            <div className="button">
-                                <Link href="/">BUY 0.001 ETH</Link>
-                            </div>
-                            <div className="links">
-                                <Link href="/">
-                                    <LucideDownload size={16} />
-                                    Download
-                                </Link>
-                                <Link href="/">
-                                    <LucideSailboat size={16} />
-                                    View on Opensea
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <Image src={srcIntroImg3} alt="" />
-                            </div>
-                            <div className="title">
-                                <h6>Day #234: Easter Egg Hunt</h6>
-                                <div className="color-palette">
-                                    <div className="color" style={{ backgroundColor: "#FFD700" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FFA500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF6347" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF4500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF0000" }}></div>
-                                </div>
-                            </div>
-                            <div className="button">
-                                <Link href="/">BUY 0.001 ETH</Link>
-                            </div>
-                            <div className="links">
-                                <Link href="/">
-                                    <LucideDownload size={16} />
-                                    Download
-                                </Link>
-                                <Link href="/">
-                                    <LucideSailboat size={16} />
-                                    View on Opensea
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <Image src={srcIntroImg4} alt="" />
-                            </div>
-                            <div className="title">
-                                <h6>Day #234: Easter Egg Hunt</h6>
-                                <div className="color-palette">
-                                    <div className="color" style={{ backgroundColor: "#FFD700" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FFA500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF6347" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF4500" }}></div>
-                                    <div className="color" style={{ backgroundColor: "#FF0000" }}></div>
-                                </div>
-                            </div>
-                            <div className="button">
-                                <Link href="/">BUY 0.001 ETH</Link>
-                            </div>
-                            <div className="links">
-                                <Link href="/">
-                                    <LucideDownload size={16} />
-                                    Download
-                                </Link>
-                                <Link href="/">
-                                    <LucideSailboat size={16} />
-                                    View on Opensea
-                                </Link>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

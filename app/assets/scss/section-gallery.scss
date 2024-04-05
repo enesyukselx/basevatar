@@ -22,6 +22,10 @@
         }
 
         .button > a {
+            &.mint-btn {
+                @apply bg-zinc-600 hover:bg-zinc-700;
+            }
+
             @apply block text-center py-2 mt-2 text-sm font-semibold text-white bg-amber-800 hover:bg-amber-700 rounded;
         }
 
