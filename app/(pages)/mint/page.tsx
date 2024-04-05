@@ -1,6 +1,4 @@
 import Image from "next/image";
-
-import srcIntroImg1 from "@/app/assets/img/intro-img-4.png";
 import CountDown from "./components/CountDown";
 
 import { prisma } from "@/app/db";

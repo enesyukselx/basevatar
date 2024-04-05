@@ -21,7 +21,7 @@ const Navbar = () => {
         if (session?.address) {
             router.refresh();
         }
-    }, [session]);
+    }, [session, router]);
 
     return (
         <nav className={classes.navbar}>

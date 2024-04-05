@@ -2,7 +2,6 @@ import { SiweMessage } from "siwe";
 import { createSIWEConfig } from "@web3modal/siwe";
 import { getCsrfToken, signIn, signOut, getSession } from "next-auth/react";
 import type { SIWECreateMessageArgs, SIWESession, SIWEVerifyMessageArgs } from "@web3modal/siwe";
-import { redirect } from "next/navigation";
 
 const siweConfig = createSIWEConfig({
     createMessage: ({ nonce, address, chainId }: SIWECreateMessageArgs) =>

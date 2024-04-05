@@ -1,25 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CountDown = ({ currDate, date }: { currDate: Date; date: string }) => {
     const endDate = new Date(date);
     const now = currDate;
-    let timeDifference = endDate.getTime() - now.getTime() < 0 ? 0 : endDate.getTime() - now.getTime();
+    const timeDifference = useRef(endDate.getTime() - now.getTime() < 0 ? 0 : endDate.getTime() - now.getTime());
 
     const [countdown, setCountdown] = useState({
-        hours: Math.floor(timeDifference / (1000 * 60 * 60)),
-        minutes: Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((timeDifference % (1000 * 60)) / 1000),
+        hours: Math.floor(timeDifference.current / (1000 * 60 * 60)),
+        minutes: Math.floor((timeDifference.current % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((timeDifference.current % (1000 * 60)) / 1000),
     });
 
     useEffect(() => {
         const interval = setInterval(() => {
-            timeDifference = timeDifference - 1000;
-            if (timeDifference > 0) {
-                const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            timeDifference.current = timeDifference.current - 1000;
+            if (timeDifference.current > 0) {
+                const hours = Math.floor(timeDifference.current / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference.current % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference.current % (1000 * 60)) / 1000);
 
                 setCountdown({ hours, minutes, seconds });
             } else {
