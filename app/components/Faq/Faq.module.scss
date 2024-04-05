@@ -1,0 +1,36 @@
+.accordion {
+    @apply mt-4 max-w-[900px];
+
+    &-item {
+        // arrow icon
+        svg {
+            @apply transition-transform;
+        }
+
+        &.active {
+            .accordion-title {
+                @apply bg-white text-black;
+            }
+
+            .accordion-content {
+                @apply block;
+            }
+
+            // arrow icon
+            svg {
+                @apply transform rotate-180;
+            }
+        }
+
+        @apply border border-white my-4;
+
+        .accordion-title {
+            @apply w-full flex justify-between items-center p-4 cursor-pointer font-semibold;
+        }
+
+        .accordion-content {
+            @apply hidden;
+            @apply p-4;
+        }
+    }
+}

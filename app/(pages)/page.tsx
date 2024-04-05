@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import srcIntroImg1 from "./assets/img/intro-img-1.png";
-import srcIntroImg2 from "./assets/img/intro-img-2.png";
-import srcIntroImg3 from "./assets/img/intro-img-3.png";
-import srcIntroImg4 from "./assets/img/intro-img-4.png";
+import srcIntroImg1 from "../assets/img/intro-img-1.png";
+import srcIntroImg2 from "../assets/img/intro-img-2.png";
+import srcIntroImg3 from "../assets/img/intro-img-3.png";
+import srcIntroImg4 from "../assets/img/intro-img-4.png";
 
 export default function Home() {
     return (
