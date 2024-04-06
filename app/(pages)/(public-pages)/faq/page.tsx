@@ -1,4 +1,4 @@
-import Faq from "../../components/Faq/Faq";
+import Faq from "../../../components/Faq/Faq";
 import { prisma } from "@/app/db";
 
 const Page = async () => {

@@ -1,0 +1,25 @@
+.admin {
+    @apply py-8;
+
+    .menu {
+        @apply border-2 border-white px-4 py-6;
+
+        ul {
+            @apply text-lg text-center font-semibold;
+            li {
+                @apply relative py-3 border-b-2 border-white first:border-t-2;
+
+                & > a {
+                    &:hover {
+                        @apply text-amber-400;
+                    }
+
+                    &:before {
+                        @apply absolute left-0 w-full h-full;
+                        content: "";
+                    }
+                }
+            }
+        }
+    }
+}

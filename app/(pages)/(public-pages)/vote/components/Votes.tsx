@@ -2,7 +2,7 @@
 
 import { useSendTransaction, useWaitForTransactionReceipt } from "wagmi";
 import { parseEther } from "viem";
-import { sendVote } from "@/app/actions/send-vote";
+import { sendVote } from "@/app/actions/public-pages/send-vote";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
