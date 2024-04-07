@@ -2,12 +2,12 @@
     @apply py-8;
 
     .menu {
-        @apply border-2 border-white px-4 py-6;
+        @apply border-2 border-white;
 
         ul {
             @apply text-lg text-center font-semibold;
             li {
-                @apply relative py-3 border-b-2 border-white first:border-t-2;
+                @apply relative py-3 border-b-2 border-white last:border-b-0;
 
                 & > a {
                     &:hover {
@@ -23,3 +23,5 @@
         }
     }
 }
+
+@import "./section-faq-admin.scss";

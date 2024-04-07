@@ -9,30 +9,28 @@ const Faq = async () => {
     });
 
     return (
-        <section className="admin-faq">
+        <section className="section-faq-admin">
             <div className="container">
                 <div className="heading">
                     <h1 className="title">FAQ Settings</h1>
                     <p className="subtitle">
                         You can manage the FAQ section here. You can add, edit, and delete questions and answers.
                     </p>
+                    <Link
+                        href="/admin/faq/create"
+                        className="border-2 border-white font-semibold inline-block px-3 py-1 mt-2 hover:bg-white hover:text-black"
+                    >
+                        Create
+                    </Link>
                 </div>
-                <ul className="mt-4">
+                <ul>
                     {faq.map((item) => (
-                        <li
-                            key={item.id}
-                            className="border-2 border-white flex justify-between items-center px-4 py-4 mb-2"
-                        >
+                        <li key={item.id}>
                             <div className="question">
                                 <h3 className="font-semibold">{item.title}</h3>
                             </div>
                             <div className="actions">
-                                <Link
-                                    className="hover:bg-white bg-black border-2 border-white text-white hover:text-black px-2 py-1 font-semibold"
-                                    href={`faq/${item.id}`}
-                                >
-                                    Edit
-                                </Link>
+                                <Link href={`faq/${item.id}`}>Edit</Link>
                             </div>
                         </li>
                     ))}

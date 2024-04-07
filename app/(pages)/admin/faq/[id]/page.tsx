@@ -1,23 +1,29 @@
+import { redirect } from "next/navigation";
+
 import { prisma } from "@/app/db";
-import Form from "./Form";
+import FaqForm from "../../components/FaqForm/FaqForm";
 
 const Page = async ({ params }: { params: { id: string } }) => {
-    const faq = await prisma.faq.findFirst({
-        where: {
-            id: params.id,
-        },
-    });
+    try {
+        const faq = await prisma.faq.findFirst({
+            where: {
+                id: params.id,
+            },
+        });
 
-    return (
-        <section>
-            <div className="container">
-                <div className="heading">
-                    <h1 className="title">Edit FAQ</h1>
+        return (
+            <section>
+                <div className="container">
+                    <div className="heading">
+                        <h1 className="title">Edit FAQ</h1>
+                    </div>
+                    {faq && <FaqForm type="update" data={faq} />}
                 </div>
-                {faq && <Form data={faq} />}
-            </div>
-        </section>
-    );
+            </section>
+        );
+    } catch (e) {
+        redirect("/admin/faq");
+    }
 };
 
 export default Page;
