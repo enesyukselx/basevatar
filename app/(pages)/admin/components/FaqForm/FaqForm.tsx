@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useOptimistic } from "react";
 
 import faqAction from "@/app/actions/admin/faq-action";
 import classes from "./FaqForm.module.scss";
@@ -16,6 +17,7 @@ interface IFaq {
 type FaqFormProps = { type: "create"; data?: never } | { type: "update"; data: IFaq };
 
 const FaqForm = ({ type, data }: FaqFormProps) => {
+    //
     const router = useRouter();
 
     return (

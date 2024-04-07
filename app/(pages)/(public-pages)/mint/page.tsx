@@ -1,7 +1,7 @@
 import Image from "next/image";
 import CountDown from "./components/CountDown";
 
-import { prisma } from "@/app/db";
+import { prisma } from "@/app/lib/db";
 
 const Page = async () => {
     const currDate = new Date();

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { prisma } from "@/app/db";
+import { prisma } from "@/app/lib/db";
 import FaqForm from "../../components/FaqForm/FaqForm";
 
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -13,12 +13,10 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
         return (
             <section>
-                <div className="container">
-                    <div className="heading">
-                        <h1 className="title">Edit FAQ</h1>
-                    </div>
-                    {faq && <FaqForm type="update" data={faq} />}
+                <div className="heading">
+                    <h1 className="title">Edit FAQ</h1>
                 </div>
+                {faq && <FaqForm type="update" data={faq} />}
             </section>
         );
     } catch (e) {

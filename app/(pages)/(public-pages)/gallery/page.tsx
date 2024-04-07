@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { LucideDownload, LucideSailboat } from "lucide-react";
 
-import { prisma } from "@/app/db";
+import { prisma } from "@/app/lib/db";
 
 const Page = async () => {
     const currDate = new Date();

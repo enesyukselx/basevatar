@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/app/db";
+import { prisma } from "@/app/lib/db";
 
 export async function sendVote({ id, walletAddress }: { id: string; walletAddress: string }) {
     const updatedData = await prisma.votes.update({

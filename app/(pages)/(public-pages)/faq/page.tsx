@@ -1,5 +1,5 @@
 import Faq from "../../../components/Faq/Faq";
-import { prisma } from "@/app/db";
+import { prisma } from "@/app/lib/db";
 
 const Page = async () => {
     const items = await prisma.faq.findMany({

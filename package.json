@@ -24,7 +24,8 @@
     "react-toastify": "^10.0.5",
     "siwe": "^2.1.4",
     "viem": "^2.9.9",
-    "wagmi": "^2.5.18"
+    "wagmi": "^2.5.18",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
