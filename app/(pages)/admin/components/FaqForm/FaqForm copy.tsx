@@ -1,13 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useOptimistic } from "react";
 
 import faqAction from "@/app/actions/admin/faq-action";
 import classes from "./FaqForm.module.scss";
 import { faqDelete } from "@/app/actions/admin/faq-delete";
-import { useFormState } from "react-dom";
-import faqTest from "@/app/actions/admin/faq-test";
-import { TFormState } from "@/app/types";
 
 interface IFaq {
     id: string;
@@ -20,18 +18,11 @@ type FaqFormProps = { type: "create"; data?: never } | { type: "update"; data: I
 
 const FaqForm = ({ type, data }: FaqFormProps) => {
     //
-    const [state, action] = useFormState((prevState: TFormState, data: FormData) => faqTest(prevState, data), {
-        message: "",
-    });
-
     const router = useRouter();
 
-    console.log(state);
-
     return (
-        <form className={classes.form} action={action}>
+        <form className={classes.form} action={faqAction.bind(null, data?.id || "")}>
             <div className={classes["form-group"]}>
-                {type === "update" && <input type="hidden" name="id" value={data.id} />}
                 <label htmlFor="title">Title</label>
                 <input
                     className="text-black"
