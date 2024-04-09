@@ -58,6 +58,7 @@ const FaqForm = ({ type, data }: FaqFormProps) => {
             </div>
             <div className={classes["form-group"]}>
                 <button
+                    className="btn"
                     onClick={(e) => {
                         e.preventDefault();
                         router.back();
@@ -70,7 +71,7 @@ const FaqForm = ({ type, data }: FaqFormProps) => {
                 </button>
                 {type === "update" && (
                     <button
-                        className={classes["delete-btn"]}
+                        className={`btn ${classes["delete-btn"]}`}
                         onClick={() => {
                             if (confirm("Are you sure you want to delete this FAQ?")) {
                                 faqDelete(data.id);

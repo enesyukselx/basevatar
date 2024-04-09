@@ -16,6 +16,14 @@ body {
     }
 }
 
+.btn {
+    @apply inline-block border-2 border-white;
+
+    &:hover {
+        @apply bg-white text-black;
+    }
+}
+
 @import "./section-intro.scss";
 @import "./section-gallery.scss";
 @import "./section-mint.scss";

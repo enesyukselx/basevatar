@@ -23,8 +23,12 @@ export default function Home() {
                         </p>
 
                         <div className="mt-8 links">
-                            <Link href="/draw">Start Drawing</Link>
-                            <Link href="/earn">Earn Points</Link>
+                            <Link className="btn" href="/draw">
+                                Start Drawing
+                            </Link>
+                            <Link className="btn" href="/earn">
+                                Earn Points
+                            </Link>
                         </div>
                     </div>
                     <div className="lg:col-6">

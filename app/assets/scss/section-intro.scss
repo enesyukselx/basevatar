@@ -23,7 +23,7 @@
 
         .links {
             & > a {
-                @apply inline-block border-2 rounded px-6 py-4 text-xl;
+                @apply px-6 py-4 text-xl;
 
                 &:first-child {
                     @apply bg-blue-500 hover:bg-blue-600  border-blue-600 mr-4 mb-6;

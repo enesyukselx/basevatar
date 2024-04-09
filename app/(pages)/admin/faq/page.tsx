@@ -1,7 +1,7 @@
 import { prisma } from "@/app/lib/db";
 import Link from "next/link";
 
-const Faq = async () => {
+const Page = async () => {
     const faq = await prisma.faq.findMany({
         orderBy: {
             order: "asc",
@@ -15,10 +15,7 @@ const Faq = async () => {
                 <p className="subtitle">
                     You can manage the FAQ section here. You can add, edit, and delete questions and answers.
                 </p>
-                <Link
-                    href="/admin/faq/create"
-                    className="border-2 border-white font-semibold inline-block px-3 py-1 mt-2 hover:bg-white hover:text-black"
-                >
+                <Link href="/admin/faq/create" className="btn font-semibold px-3 py-1 mt-2">
                     Create
                 </Link>
             </div>
@@ -38,4 +35,4 @@ const Faq = async () => {
     );
 };
 
-export default Faq;
+export default Page;
