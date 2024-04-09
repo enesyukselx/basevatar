@@ -22,9 +22,9 @@ const Page = async () => {
         },
     });
 
-    const subjects = await prisma.votes.findMany({
+    const themes = await prisma.votes.findMany({
         where: {
-            type: "subject",
+            type: "theme",
             day: Number(settings?.value) + 1 ?? 1,
         },
     });
@@ -35,7 +35,7 @@ const Page = async () => {
                 <div className="heading">
                     <h1 className="title">Vote for Day #{Number(settings?.value) + 1 || 1} Themes</h1>
                     <p className="subtitle">
-                        Vote for the colors and subjects you want to see in the next day&apos;s theme.
+                        Vote for the colors and themes you want to see in the next day&apos;s theme.
                     </p>
                     <p className="subtitle">Each vote costs {VOTE_ETH_PRICE} ETH.</p>
                 </div>
@@ -51,7 +51,7 @@ const Page = async () => {
                     <div className="sm:col-6 lg:col-4">
                         <Votes
                             type="theme"
-                            data={subjects}
+                            data={themes}
                             walletAddress={session?.address || ""}
                             ethPrice={VOTE_ETH_PRICE}
                         />

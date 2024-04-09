@@ -9,6 +9,7 @@ export interface IVote {
     id: string;
     value: string[];
     count: number;
+    type?: "color" | "theme";
 }
 
 export type TFormState = {

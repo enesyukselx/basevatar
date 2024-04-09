@@ -32,12 +32,12 @@ model gallery {
 
 enum voteTypes {
   color
-  subject
+  theme
 }
 
 model votes {
   id    String    @id @default(auto()) @map("_id") @db.ObjectId
-  count Int
+  count Int       @default(0)
   date  DateTime  @db.Date
   type  voteTypes
   value String[]

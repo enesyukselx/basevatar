@@ -1,0 +1,15 @@
+.votes {
+    @apply mt-4;
+    .vote-item {
+        @apply mb-4 px-4 py-2;
+        @apply bg-gray-900 text-white border-2 border-white;
+
+        .type {
+            @apply text-lg font-semibold;
+        }
+
+        .value {
+            @apply my-2;
+        }
+    }
+}

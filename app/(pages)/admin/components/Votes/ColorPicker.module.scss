@@ -1,0 +1,18 @@
+.color-picker {
+    & > .colors {
+        @apply bg-white p-2 rounded-sm;
+        & > .color {
+            @apply text-black font-semibold flex items-center gap-2 mb-2;
+            & > div:first-of-type {
+                @apply inline-block w-8 h-8 rounded-sm;
+            }
+        }
+
+        & > .picker {
+            @apply flex items-center gap-2;
+            & > input {
+                @apply w-8 h-8 rounded-sm;
+            }
+        }
+    }
+}

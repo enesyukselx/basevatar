@@ -1,0 +1,26 @@
+.type-actions {
+    @apply my-2;
+    & > button {
+        @apply py-1 px-4 mr-2;
+        @apply bg-white text-black font-semibold;
+
+        &.active {
+            @apply bg-green-700 text-white;
+        }
+    }
+}
+
+.form {
+    .form-group {
+        @apply mb-4;
+
+        label {
+            @apply block text-white font-semibold;
+            @apply mb-2;
+        }
+
+        input {
+            @apply w-full px-4 py-2 border-2 border-black text-black;
+        }
+    }
+}
