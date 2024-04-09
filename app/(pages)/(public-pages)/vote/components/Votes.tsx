@@ -6,12 +6,7 @@ import { sendVote } from "@/app/actions/public-pages/send-vote";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
-
-interface IVote {
-    id: string;
-    value: string[];
-    count: number;
-}
+import { IVote } from "@/app/types";
 
 interface IVoteProps {
     data: IVote[];
