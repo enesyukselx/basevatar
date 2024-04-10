@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 
 import { config, projectId } from "../config/wallet-connect/wagmiConfig";
 
