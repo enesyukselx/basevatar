@@ -5,8 +5,16 @@ import { redirect } from "next/navigation";
 
 import { voteValidationSchema } from "@/app/lib/validationSchemas";
 import { TFormState } from "@/app/types";
+import checkAdmin from "@/app/utils/checkSession";
 
 export default async function voteAction(prevState: TFormState, formData: FormData): Promise<TFormState> {
+    //
+    if (!(await checkAdmin()))
+        return {
+            message: "Unauthorized.",
+            errors: {},
+        };
+
     const formValues = {
         day: parseInt(formData.get("day") as string),
         value: (formData.get("value") as string).split(","),
