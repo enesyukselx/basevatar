@@ -3,11 +3,11 @@
 import { createContext } from "react";
 
 export interface ICanvasContext {
-    canvas: string;
+    canvas: HTMLCanvasElement | null;
 }
 
 const CanvasContext = createContext<ICanvasContext>({
-    canvas: "canvas",
+    canvas: null,
 });
 
 export default CanvasContext;

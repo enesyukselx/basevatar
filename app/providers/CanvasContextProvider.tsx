@@ -5,7 +5,7 @@ import CanvasContext, { ICanvasContext } from "./CanvasContext";
 
 const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
     const values: ICanvasContext = {
-        canvas: "canvas",
+        canvas: null,
     };
 
     return <CanvasContext.Provider value={values}>{children}</CanvasContext.Provider>;
