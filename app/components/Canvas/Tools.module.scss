@@ -1,0 +1,18 @@
+.tools {
+    .settings {
+        @apply my-4 flex gap-2;
+        button {
+            @apply bg-white text-gray-800 px-1 py-1 rounded hover:bg-gray-200;
+        }
+    }
+
+    .colors {
+        @apply my-4 flex gap-2;
+        .color {
+            @apply inline-block w-8 h-8 rounded border-2 border-gray-400 cursor-pointer;
+        }
+        .active {
+            @apply border-white;
+        }
+    }
+}
