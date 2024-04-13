@@ -4,8 +4,7 @@ import { useRouter } from "next/navigation";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ConnectKitProvider, getDefaultConfig } from "connectkit";
-import { siweClient } from "@/app/utils/siweClient";
+import { ConnectKitProvider, getDefaultConfig, SIWEProvider } from "connectkit";
 import { SiweMessage } from "siwe";
 
 const config = createConfig(
@@ -64,7 +63,7 @@ const SiweProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <siweClient.Provider
+        <SIWEProvider
             // Optional parameters
             enabled={true} // defaults true
             nonceRefetchInterval={300000} // in milliseconds, defaults to 5 minutes
@@ -77,7 +76,7 @@ const SiweProvider = ({ children }: { children: React.ReactNode }) => {
             onSignOut={() => router.refresh()}
         >
             {children}
-        </siweClient.Provider>
+        </SIWEProvider>
     );
 };
 
