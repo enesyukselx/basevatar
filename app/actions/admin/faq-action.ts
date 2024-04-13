@@ -5,11 +5,11 @@ import { redirect } from "next/navigation";
 
 import { faqValidationSchema } from "@/app/lib/validationSchemas";
 import { TFormState } from "@/app/types";
-import { checkAdmin } from "@/app/utils/checkSession";
+import { isAdmin } from "@/app/utils/sessionHelpers";
 
 export default async function faqAction(prevState: TFormState, formData: FormData): Promise<TFormState> {
     //
-    if (!(await checkAdmin()))
+    if (!(await isAdmin()))
         return {
             message: "Unauthorized.",
             errors: {},

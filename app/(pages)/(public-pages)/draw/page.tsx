@@ -1,7 +1,7 @@
 import { prisma } from "@/app/lib/db";
 import Canvas from "@/app/components/Canvas/Canvas";
 import CanvasContextProvider from "@/app/providers/CanvasContextProvider";
-import getSession from "@/app/utils/getSession";
+import { getSession } from "@/app/utils/sessionHelpers";
 
 const Page = async () => {
     const session = await getSession();

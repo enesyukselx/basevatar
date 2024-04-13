@@ -1,7 +1,7 @@
 import { prisma } from "@/app/lib/db";
 
 import Votes from "./components/Votes";
-import getSession from "@/app/utils/getSession";
+import { getSession } from "@/app/utils/sessionHelpers";
 
 const Page = async () => {
     const session = await getSession();

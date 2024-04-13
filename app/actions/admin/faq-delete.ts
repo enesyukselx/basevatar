@@ -1,12 +1,12 @@
 "use server";
 
 import { prisma } from "@/app/lib/db";
+import { isAdmin } from "@/app/utils/sessionHelpers";
 import { redirect } from "next/navigation";
-import { checkAdmin } from "@/app/utils/checkSession";
 
 export async function faqDelete(id: string) {
     //
-    if (!(await checkAdmin())) return;
+    if (!(await isAdmin())) return;
 
     await prisma.faq.delete({
         where: {

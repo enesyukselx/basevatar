@@ -1,17 +1,15 @@
 import Link from "next/link";
 
 import "./assets/admin-layout.scss";
-import getSession from "@/app/utils/getSession";
 import { redirect } from "next/navigation";
+import { isAdmin } from "@/app/utils/sessionHelpers";
 
 export default async function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const session = await getSession();
-
-    if (!session || !session.address || session.address !== process.env.ADMIN_WALLET_ADDRESS) redirect("/");
+    if (!(await isAdmin())) redirect("/");
 
     return (
         <div className="admin">

@@ -4,11 +4,8 @@ import Image from "next/image";
 import { LucideDownload, LucideSailboat } from "lucide-react";
 
 import { prisma } from "@/app/lib/db";
-import getSession from "@/app/utils/getSession";
 
 const Page = async () => {
-    const session = await getSession();
-
     const currDate = new Date();
 
     const items = await prisma.gallery.findMany({

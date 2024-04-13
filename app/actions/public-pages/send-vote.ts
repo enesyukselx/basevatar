@@ -1,14 +1,13 @@
 "use server";
 
 import { prisma } from "@/app/lib/db";
-import { checkSession } from "@/app/utils/checkSession";
-import { checkTransaction } from "@/app/utils/checkTransaction";
-import getSession from "@/app/utils/getSession";
+import { isTransactionValid } from "@/app/utils/isTransactionValid";
+import { getSession, isSessionValid } from "@/app/utils/sessionHelpers";
 
 export async function sendVote({ id, hash }: { id: string; hash: string }) {
     //
     const session = await getSession();
-    if (!(await checkSession())) return;
+    if (!(await isSessionValid())) return;
 
     const hashCount = await prisma.voteLogs.count({
         where: {
@@ -19,7 +18,7 @@ export async function sendVote({ id, hash }: { id: string; hash: string }) {
     if (hashCount > 0) return;
 
     const walletAddress = session?.address;
-    const transaction = await checkTransaction(hash);
+    const transaction = await isTransactionValid(hash);
     if (!transaction) throw new Error("Transaction not found.");
 
     const updatedData = await prisma.votes.update({
