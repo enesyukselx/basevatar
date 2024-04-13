@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     title: "Basevatar",
     description: "Basevatar",
 };
+import { Web3Provider } from "@/app/providers/Web3Provider";
 
 export default function RootLayout({
     children,
@@ -16,8 +17,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={inter.className}>{children}</body>
-        </html>
+        <Web3Provider>
+            <html lang="en">
+                <body className={inter.className}>{children}</body>
+            </html>
+        </Web3Provider>
     );
 }

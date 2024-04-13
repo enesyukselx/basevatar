@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
-//
-import Web3ModalProvider from "../providers/Web3ModalProvider";
-import { cookieToInitialState } from "wagmi";
-import { config } from "../config/wallet-connect/wagmiConfig";
-//
 import "../assets/scss/layout.scss";
 import Navbar from "../components/Navbar/Navbar";
-import NextAuthProvider from "../providers/NextAuthProvider";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,17 +15,13 @@ export default function Layout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const initialState = cookieToInitialState(config, headers().get("cookie"));
-
     return (
-        <NextAuthProvider>
-            <Web3ModalProvider initialState={initialState}>
-                <header>
-                    <Navbar />
-                </header>
-                <main>{children}</main>
-                <ToastContainer />
-            </Web3ModalProvider>
-        </NextAuthProvider>
+        <>
+            <header>
+                <Navbar />
+            </header>
+            <main>{children}</main>
+            <ToastContainer />
+        </>
     );
 }

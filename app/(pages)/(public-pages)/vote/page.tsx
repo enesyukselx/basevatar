@@ -1,11 +1,10 @@
 import { prisma } from "@/app/lib/db";
-import { getServerSession } from "next-auth/next";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
 
 import Votes from "./components/Votes";
+import getSession from "@/app/utils/getSession";
 
 const Page = async () => {
-    const session = await getServerSession(authOptions);
+    const session = await getSession();
 
     const settings = await prisma.settings.findFirst({
         where: {

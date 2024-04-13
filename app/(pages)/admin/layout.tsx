@@ -1,21 +1,17 @@
-import { getServerSession } from "next-auth/next";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
-
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import "./assets/admin-layout.scss";
+import getSession from "@/app/utils/getSession";
+import { redirect } from "next/navigation";
 
 export default async function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const session = await getServerSession(authOptions);
+    const session = await getSession();
 
-    if (session?.address !== process.env.ADMIN_WALLET_ADDRESS) {
-        redirect("/");
-    }
+    if (!session || !session.address || session.address !== process.env.ADMIN_WALLET_ADDRESS) redirect("/");
 
     return (
         <div className="admin">
