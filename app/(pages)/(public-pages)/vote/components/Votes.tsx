@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
 import { IVote } from "@/app/types";
+import { useModal, useSIWE } from "connectkit";
 
 interface IVoteProps {
     data: IVote[];
@@ -16,8 +17,11 @@ interface IVoteProps {
 }
 
 const Votes = ({ data, type, walletAddress, ethPrice }: IVoteProps) => {
-    const { data: hash, sendTransaction } = useSendTransaction();
+    //
+    const { setOpen } = useModal();
+    const { isSignedIn } = useSIWE();
 
+    const { data: hash, sendTransaction } = useSendTransaction();
     const router = useRouter();
 
     const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
@@ -65,7 +69,17 @@ const Votes = ({ data, type, walletAddress, ethPrice }: IVoteProps) => {
                     ))}
                 </div>
                 <div className="color-vote">
-                    <button disabled={isConfirming} className="vote-btn" onClick={() => handleVote(color.id)}>
+                    <button
+                        disabled={isConfirming}
+                        className="vote-btn"
+                        onClick={() => {
+                            if (!isSignedIn) {
+                                setOpen(true);
+                                return;
+                            }
+                            handleVote(color.id);
+                        }}
+                    >
                         {isConfirming ? "Confirming..." : `Vote (${color.count})`}
                     </button>
                 </div>
@@ -82,6 +96,10 @@ const Votes = ({ data, type, walletAddress, ethPrice }: IVoteProps) => {
                         disabled={isConfirming}
                         className="vote-btn"
                         onClick={() => {
+                            if (!isSignedIn) {
+                                setOpen(true);
+                                return;
+                            }
                             handleVote(subject.id);
                         }}
                     >

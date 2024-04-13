@@ -27,7 +27,7 @@ const Page = async () => {
                     <p className="subtitle">Draw your own design</p>
                     {session?.address == null && (
                         <div className="bg-red-200 px-4 mt-4 rounded py-2 font-semibold text-red-900">
-                            You need to connect your wallet to draw
+                            You need to connect your wallet and sign in to draw.
                         </div>
                     )}
                     {session?.address && (

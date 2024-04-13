@@ -14,7 +14,7 @@ const config = createConfig(
             [baseSepolia.id]: http(baseSepolia.rpcUrls.default.http[0]),
         },
         walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "",
-
+        ssr: true,
         appName: "Basevatar",
         appDescription: "Your App Description",
         appUrl: "https://basevatar.com", // your app's url
