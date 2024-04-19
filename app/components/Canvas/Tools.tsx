@@ -11,7 +11,7 @@ const Tools = ({ colors }: { colors: string[] }) => {
     const [activeColor, setActiveColor] = useState<string>(canvasDatas.currentColor);
 
     const undoHandler = () => {
-        const last = canvasDatas.history.pop();
+        const last = canvasDatas.history[canvasDatas.history.length - 1];
         if (!last) return;
 
         undoPixels(last);

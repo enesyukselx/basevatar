@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
     //
-    const { canvas, canvasProperties, addPixel, addHistory, undoWithClick, updateAvailableColors } = useCanvas();
+    const { canvas, canvasDatas, canvasProperties, addPixel, addHistory, updateAvailableColors } = useCanvas();
     const [isDrawing, setIsDrawing] = useState(false);
     const [lastDraw, setLastDraw] = useState<Record<string, string>>({});
 
@@ -19,10 +19,10 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
         const x = Math.floor(e.nativeEvent.offsetX / canvasProperties.pixelSize);
         const y = Math.floor(e.nativeEvent.offsetY / canvasProperties.pixelSize);
         if (lastDraw.x !== x.toString() || lastDraw.y !== y.toString()) {
-            addPixel({ [`${x},${y}`]: canvasProperties.currentColor });
+            addPixel({ [`${x},${y}`]: canvasDatas.currentColor });
             setLastDraw({
                 ...lastDraw,
-                [`${x},${y}`]: canvasProperties.currentColor,
+                [`${x},${y}`]: canvasDatas.currentColor,
             });
         }
     };
@@ -36,12 +36,6 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
             });
             return prev;
         });
-    };
-
-    const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        const x = Math.floor(e.nativeEvent.offsetX / canvasProperties.pixelSize);
-        const y = Math.floor(e.nativeEvent.offsetY / canvasProperties.pixelSize);
-        undoWithClick(x, y);
     };
 
     return (
@@ -59,7 +53,6 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
                 onMouseUp={() => (isDrawing ? handleLeave() : null)}
                 onMouseLeave={() => (isDrawing ? handleLeave() : null)}
                 onMouseMove={(e) => (isDrawing ? handleDraw(e) : null)}
-                onClick={(e) => (!isDrawing ? handleClick(e) : null)}
             />
         </>
     );

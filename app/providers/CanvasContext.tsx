@@ -5,13 +5,13 @@ import { createContext, RefObject } from "react";
 export type TCanvasDatas = {
     pixelData: Record<string, string[]>;
     history: Record<string, string>[];
+    backgroundColor: string;
+    currentColor: string;
 };
 export type TCanvasProperties = {
     width: number;
     height: number;
     pixelSize: number;
-    backgroundColor: string;
-    currentColor: string;
     availableColors: string[];
 };
 
@@ -21,7 +21,8 @@ export interface ICanvasContext {
     canvasDatas: TCanvasDatas;
     addPixel: (data: Record<string, string>) => void;
     addHistory: (data: Record<string, string>) => void;
-    undoWithClick: (x: number, y: number) => void;
+    undoPixels: (last: Record<string, string>) => void;
+    clearCanvas: () => void;
     updateAvailableColors: (colors: string[]) => void;
     changeBackgroundColor: (color: string) => void;
     changeColor: (color: string) => void;
@@ -35,17 +36,18 @@ const CanvasContext = createContext<ICanvasContext>({
         width: 400,
         height: 400,
         pixelSize: 1,
-        backgroundColor: "#ffffff",
-        currentColor: "#000000",
         availableColors: [],
     },
     canvasDatas: {
         pixelData: {},
         history: [],
+        backgroundColor: "#ffffff",
+        currentColor: "#000000",
     },
     addPixel: () => {},
     addHistory: () => {},
-    undoWithClick: () => {},
+    undoPixels: () => {},
+    clearCanvas: () => {},
     updateAvailableColors: () => {},
     changeBackgroundColor: () => {},
     changeColor: () => {},
