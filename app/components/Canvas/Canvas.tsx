@@ -6,9 +6,8 @@ import { useEffect, useState } from "react";
 
 const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
     //
-    const { canvas, canvasHeight, canvasWidth, addPixel, pixelSize, addHistory, canvasDatas, updateAvailableColors } =
-        useCanvas();
-
+    const { canvas, canvasProperties, addPixel, addHistory, undoWithClick, updateAvailableColors } = useCanvas();
+    const [isDrawing, setIsDrawing] = useState(false);
     const [lastDraw, setLastDraw] = useState<Record<string, string>>({});
 
     useEffect(() => {
@@ -16,20 +15,20 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const mouseMoveHandler = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        //
-        if (!e.buttons) return;
-        const x = Math.floor(e.nativeEvent.offsetX / pixelSize);
-        const y = Math.floor(e.nativeEvent.offsetY / pixelSize);
-        addPixel({ [`${x},${y}`]: canvasDatas.currentColor });
-        setLastDraw({
-            ...lastDraw,
-            [`${x},${y}`]: canvasDatas.currentColor,
-        });
+    const handleDraw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        const x = Math.floor(e.nativeEvent.offsetX / canvasProperties.pixelSize);
+        const y = Math.floor(e.nativeEvent.offsetY / canvasProperties.pixelSize);
+        if (lastDraw.x !== x.toString() || lastDraw.y !== y.toString()) {
+            addPixel({ [`${x},${y}`]: canvasProperties.currentColor });
+            setLastDraw({
+                ...lastDraw,
+                [`${x},${y}`]: canvasProperties.currentColor,
+            });
+        }
     };
 
-    const mouseUpHandler = () => {
-        //
+    const handleLeave = () => {
+        setIsDrawing(false);
         addHistory(lastDraw);
         setLastDraw((prev) => {
             Object.keys(prev).forEach((key) => {
@@ -37,6 +36,12 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
             });
             return prev;
         });
+    };
+
+    const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        const x = Math.floor(e.nativeEvent.offsetX / canvasProperties.pixelSize);
+        const y = Math.floor(e.nativeEvent.offsetY / canvasProperties.pixelSize);
+        undoWithClick(x, y);
     };
 
     return (
@@ -48,11 +53,13 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
             <canvas
                 className="bg-gray-100"
                 ref={canvas}
-                width={canvasWidth}
-                height={canvasHeight}
-                onMouseMove={(e) => mouseMoveHandler(e)}
-                onMouseDown={(e) => mouseMoveHandler(e)}
-                onMouseUp={() => mouseUpHandler()}
+                width={canvasProperties.width}
+                height={canvasProperties.height}
+                onMouseDown={() => setIsDrawing(true)}
+                onMouseUp={() => (isDrawing ? handleLeave() : null)}
+                onMouseLeave={() => (isDrawing ? handleLeave() : null)}
+                onMouseMove={(e) => (isDrawing ? handleDraw(e) : null)}
+                onClick={(e) => (!isDrawing ? handleClick(e) : null)}
             />
         </>
     );
