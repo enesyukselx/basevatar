@@ -1,0 +1,22 @@
+.image-viewer {
+    @apply relative;
+    @apply border-2 border-white rounded-lg;
+
+    .input {
+        @apply flex justify-between items-center gap-4 px-4 py-2;
+        @apply bg-white text-black;
+
+        & > svg {
+            @apply cursor-grab;
+        }
+
+        & > input {
+            @apply w-full px-2 py-2;
+            @apply border border-gray-300 rounded-lg;
+        }
+    }
+
+    .opacity {
+        @apply bg-gray-100 font-bold;
+    }
+}

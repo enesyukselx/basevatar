@@ -4,6 +4,7 @@ import useCanvas from "@/app/hooks/useCanvas";
 import classes from "./Tools.module.scss";
 import { LucideImage, LucideMinus, LucidePlus, LucideSave, LucideTrash2, LucideUndo } from "lucide-react";
 import { useState } from "react";
+import ImageViewer from "./ImageViewer";
 
 const Tools = ({ colors }: { colors: string[] }) => {
     const { canvasDatas, changeColor, undoPixels, zoomIn, zoomOut, clearCanvas, changeBackgroundColor } = useCanvas();
@@ -19,6 +20,7 @@ const Tools = ({ colors }: { colors: string[] }) => {
 
     return (
         <div className={classes.tools}>
+            <ImageViewer />
             <div className={classes.settings}>
                 <button onClick={zoomIn}>
                     <LucidePlus size={24} />
