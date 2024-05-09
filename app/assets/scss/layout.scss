@@ -28,6 +28,10 @@ body {
     }
 }
 
+.error-message {
+    @apply border-red-900 bg-red-400 text-black font-bold text-lg py-4 px-4 mt-4;
+}
+
 @import "./section-intro.scss";
 @import "./section-gallery.scss";
 @import "./section-mint.scss";

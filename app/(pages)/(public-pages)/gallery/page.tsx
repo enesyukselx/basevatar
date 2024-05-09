@@ -5,17 +5,34 @@ import { LucideDownload, LucideSailboat } from "lucide-react";
 
 import { prisma } from "@/app/lib/db";
 
+const fetchData = async () => {
+    "use server";
+    try {
+        const items = await prisma.gallery.findMany({
+            orderBy: {
+                created_at: "desc",
+            },
+            where: {
+                isDeleted: false,
+            },
+        });
+
+        return {
+            items,
+            error: false,
+        };
+    } catch (e: unknown) {
+        return {
+            items: [],
+            error: true,
+        };
+    }
+};
+
 const Page = async () => {
     const currDate = new Date();
 
-    const items = await prisma.gallery.findMany({
-        orderBy: {
-            created_at: "desc",
-        },
-        where: {
-            isDeleted: false,
-        },
-    });
+    const { items, error } = await fetchData();
 
     return (
         <section className="section-gallery">
@@ -26,42 +43,54 @@ const Page = async () => {
                         <p className="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                     <div className="gallery">
-                        {items.map((item) => (
-                            <div className="item" key={item.id}>
-                                <div className="image">
-                                    <Image src={item.image_url} alt="" layout="responsive" width={900} height={600} />
-                                </div>
-                                <div className="title">
-                                    <h6>{item.title}</h6>
-                                    <div className="color-palette">
-                                        {item.colors.map((color, index) => (
-                                            <div className="color" style={{ backgroundColor: color }} key={index}></div>
-                                        ))}
+                        {!error &&
+                            items.map((item) => (
+                                <div className="item" key={item.id}>
+                                    <div className="image">
+                                        <Image
+                                            src={item.image_url}
+                                            alt=""
+                                            layout="responsive"
+                                            width={900}
+                                            height={600}
+                                        />
+                                    </div>
+                                    <div className="title">
+                                        <h6>{item.title}</h6>
+                                        <div className="color-palette">
+                                            {item.colors.map((color, index) => (
+                                                <div
+                                                    className="color"
+                                                    style={{ backgroundColor: color }}
+                                                    key={index}
+                                                ></div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="button">
+                                        {new Date(item.end_date) < currDate ? (
+                                            <Link href={item.opensea_url}>BUY</Link>
+                                        ) : (
+                                            <Link href="" className="mint-btn">
+                                                MINT
+                                            </Link>
+                                        )}
+                                    </div>
+                                    <div className="links">
+                                        <Link href={item.image_url} target="_blank">
+                                            <LucideDownload size={16} />
+                                            Download
+                                        </Link>
+                                        <Link href={item.opensea_url} target="_blank">
+                                            <LucideSailboat size={16} />
+                                            View on Opensea
+                                        </Link>
                                     </div>
                                 </div>
-                                <div className="button">
-                                    {new Date(item.end_date) < currDate ? (
-                                        <Link href={item.opensea_url}>BUY</Link>
-                                    ) : (
-                                        <Link href="" className="mint-btn">
-                                            MINT
-                                        </Link>
-                                    )}
-                                </div>
-                                <div className="links">
-                                    <Link href={item.image_url} target="_blank">
-                                        <LucideDownload size={16} />
-                                        Download
-                                    </Link>
-                                    <Link href={item.opensea_url} target="_blank">
-                                        <LucideSailboat size={16} />
-                                        View on Opensea
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 </div>
+                {error && <div className="error-message">Internal Server Error. Please try again later.</div>}
             </div>
         </section>
     );

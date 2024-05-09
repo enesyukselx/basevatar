@@ -3,14 +3,41 @@ import CountDown from "./components/CountDown";
 
 import { prisma } from "@/app/lib/db";
 
+const fetchData = async () => {
+    "use server";
+    try {
+        const item = await prisma.gallery.findFirst({
+            orderBy: {
+                created_at: "desc",
+            },
+        });
+
+        return {
+            item,
+            error: false,
+        };
+    } catch (e: unknown) {
+        return {
+            item: null,
+            error: true,
+        };
+    }
+};
+
 const Page = async () => {
     const currDate = new Date();
 
-    const item = await prisma.gallery.findFirst({
-        orderBy: {
-            created_at: "desc",
-        },
-    });
+    const { item, error } = await fetchData();
+
+    if (error) {
+        return (
+            <section className="section-mint">
+                <div className="container">
+                    <div className="error-message">Internal Server Error. Please try again later.</div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="section-mint">
