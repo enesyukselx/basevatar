@@ -1,38 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-
 import { LucideDownload, LucideSailboat } from "lucide-react";
-
-import { prisma } from "@/app/lib/db";
-
-const fetchData = async () => {
-    "use server";
-    try {
-        const items = await prisma.gallery.findMany({
-            orderBy: {
-                created_at: "desc",
-            },
-            where: {
-                isDeleted: false,
-            },
-        });
-
-        return {
-            items,
-            error: false,
-        };
-    } catch (e: unknown) {
-        return {
-            items: [],
-            error: true,
-        };
-    }
-};
+import fetchGallery from "@/app/actions/public-pages/fetch-gallery";
+import ServerErrorMessage from "@/app/components/common/ServerErrorMessage";
 
 const Page = async () => {
     const currDate = new Date();
-
-    const { items, error } = await fetchData();
+    const { items, error } = await fetchGallery();
 
     return (
         <section className="section-gallery">
@@ -90,7 +64,7 @@ const Page = async () => {
                             ))}
                     </div>
                 </div>
-                {error && <div className="error-message">Internal Server Error. Please try again later.</div>}
+                {error && <ServerErrorMessage />}
             </div>
         </section>
     );

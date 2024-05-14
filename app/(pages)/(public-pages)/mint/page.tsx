@@ -1,39 +1,18 @@
 import Image from "next/image";
 import CountDown from "./components/CountDown";
-
-import { prisma } from "@/app/lib/db";
-
-const fetchData = async () => {
-    "use server";
-    try {
-        const item = await prisma.gallery.findFirst({
-            orderBy: {
-                created_at: "desc",
-            },
-        });
-
-        return {
-            item,
-            error: false,
-        };
-    } catch (e: unknown) {
-        return {
-            item: null,
-            error: true,
-        };
-    }
-};
+import fetchMint from "@/app/actions/public-pages/fetch-mint";
+import ServerErrorMessage from "@/app/components/common/ServerErrorMessage";
 
 const Page = async () => {
     const currDate = new Date();
 
-    const { item, error } = await fetchData();
+    const { item, error } = await fetchMint();
 
     if (error) {
         return (
             <section className="section-mint">
                 <div className="container">
-                    <div className="error-message">Internal Server Error. Please try again later.</div>
+                    <ServerErrorMessage />
                 </div>
             </section>
         );

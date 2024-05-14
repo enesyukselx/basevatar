@@ -1,32 +1,9 @@
+import fetchFaq from "@/app/actions/public-pages/fetch-faq";
 import Faq from "../../../components/Faq/Faq";
-import { prisma } from "@/app/lib/db";
-
-const fetchData = async () => {
-    "use server";
-    try {
-        const items = await prisma.faq.findMany({
-            orderBy: {
-                order: "asc",
-            },
-            where: {
-                isDeleted: false,
-            },
-        });
-
-        return {
-            items,
-            error: false,
-        };
-    } catch (e: unknown) {
-        return {
-            items: [],
-            error: true,
-        };
-    }
-};
+import ServerErrorMessage from "@/app/components/common/ServerErrorMessage";
 
 const Page = async () => {
-    const { items, error } = await fetchData();
+    const { items, error } = await fetchFaq();
 
     return (
         <section className="py-8">
@@ -41,7 +18,7 @@ const Page = async () => {
                     </div>
                     <Faq data={items ?? {}} />
                 </div>
-                {error && <div className="error-message">Internal Server Error. Please try again later.</div>}
+                {error && <ServerErrorMessage />}
             </div>
         </section>
     );
