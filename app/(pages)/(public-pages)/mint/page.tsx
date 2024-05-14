@@ -1,16 +1,22 @@
 import Image from "next/image";
 import CountDown from "./components/CountDown";
-
-import { prisma } from "@/app/lib/db";
+import fetchMint from "@/app/actions/public-pages/fetch-mint";
+import ServerErrorMessage from "@/app/components/common/ServerErrorMessage";
 
 const Page = async () => {
     const currDate = new Date();
 
-    const item = await prisma.gallery.findFirst({
-        orderBy: {
-            created_at: "desc",
-        },
-    });
+    const { item, error } = await fetchMint();
+
+    if (error) {
+        return (
+            <section className="section-mint">
+                <div className="container">
+                    <ServerErrorMessage />
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="section-mint">

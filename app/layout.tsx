@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     description: "Basevatar",
 };
 import { Web3Provider } from "@/app/providers/Web3Provider";
+import NextTopLoader from "nextjs-toploader";
 
 export default function RootLayout({
     children,
@@ -19,7 +20,10 @@ export default function RootLayout({
     return (
         <Web3Provider>
             <html lang="en">
-                <body className={inter.className}>{children}</body>
+                <body className={inter.className}>
+                    <NextTopLoader />
+                    {children}
+                </body>
             </html>
         </Web3Provider>
     );

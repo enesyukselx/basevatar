@@ -7,6 +7,7 @@ import { faqDelete } from "@/app/actions/admin/faq-delete";
 import { useFormState } from "react-dom";
 import { IFaq, TFormState } from "@/app/types";
 import faqAction from "@/app/actions/admin/faq-action";
+import SubmitButton from "../SubmitButton";
 
 type FaqFormProps = { type: "create"; data?: never } | { type: "update"; data: IFaq };
 
@@ -66,9 +67,7 @@ const FaqForm = ({ type, data }: FaqFormProps) => {
                 >
                     Cancel
                 </button>
-                <button type="submit" className="btn">
-                    {type === "create" ? "Create FAQ" : "Save FAQ"}
-                </button>
+                <SubmitButton className="btn">{type === "create" ? "Create FAQ" : "Save FAQ"}</SubmitButton>
                 {type === "update" && (
                     <button
                         className={`btn ${classes["delete-btn"]}`}

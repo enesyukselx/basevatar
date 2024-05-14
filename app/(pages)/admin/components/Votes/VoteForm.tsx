@@ -8,6 +8,7 @@ import ColorPicker from "./ColorPicker";
 import { useFormState } from "react-dom";
 import { TFormState } from "@/app/types";
 import voteAction from "@/app/actions/admin/vote-action";
+import SubmitButton from "../SubmitButton";
 
 const VoteForm = ({ day }: { day: string }) => {
     //
@@ -59,9 +60,7 @@ const VoteForm = ({ day }: { day: string }) => {
                     <Link className="btn px-4 py-2 mr-4 font-semibold" href={`/admin/votes?day=${day}`}>
                         Cancel
                     </Link>
-                    <button className="btn px-4 py-2 mr-4 font-semibold" type="submit">
-                        Create Vote
-                    </button>
+                    <SubmitButton className="btn px-4 py-2 mr-4 font-semibold">Create Vote</SubmitButton>
                 </div>
             </form>
         </>

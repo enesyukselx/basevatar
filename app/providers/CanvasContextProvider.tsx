@@ -2,7 +2,9 @@
 
 import { ReactNode, useEffect, useRef, useState } from "react";
 import CanvasContext, { ICanvasContext, TCanvasDatas, TCanvasProperties } from "./CanvasContext";
-import { decryptCanvasData, encryptCanvasData } from "../actions/public-pages/canvas-actions";
+import CryptoJS from "crypto-js";
+
+const _key = process.env.NEXT_PUBLIC_LOCALSTORAGE_KEY ?? "secret_key";
 
 const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
     //
@@ -212,5 +214,19 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
 
     return <CanvasContext.Provider value={values}>{children}</CanvasContext.Provider>;
 };
+
+async function encryptCanvasData(data: TCanvasDatas) {
+    return CryptoJS.AES.encrypt(JSON.stringify(data), _key).toString();
+}
+
+async function decryptCanvasData(data: string) {
+    try {
+        const bytes = CryptoJS.AES.decrypt(data, _key);
+        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    } catch (e) {
+        console.error(e);
+        return {};
+    }
+}
 
 export default CanvasContextProvider;

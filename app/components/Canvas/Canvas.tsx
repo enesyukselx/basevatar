@@ -18,7 +18,7 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
     }, []);
 
     useEffect(() => {
-        updateLocalStorage();
+        if (isDrawing) updateLocalStorage();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isDrawing]);
 

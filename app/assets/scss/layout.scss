@@ -22,6 +22,14 @@ body {
     &:hover {
         @apply bg-white text-black;
     }
+
+    &:disabled {
+        @apply bg-gray-400 text-gray-700 cursor-not-allowed;
+    }
+}
+
+.error-message {
+    @apply border-red-900 bg-red-400 text-black font-bold text-lg py-4 px-4 mt-4;
 }
 
 @import "./section-intro.scss";

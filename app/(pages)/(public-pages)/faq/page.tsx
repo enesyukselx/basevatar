@@ -1,15 +1,9 @@
+import fetchFaq from "@/app/actions/public-pages/fetch-faq";
 import Faq from "../../../components/Faq/Faq";
-import { prisma } from "@/app/lib/db";
+import ServerErrorMessage from "@/app/components/common/ServerErrorMessage";
 
 const Page = async () => {
-    const items = await prisma.faq.findMany({
-        orderBy: {
-            order: "asc",
-        },
-        where: {
-            isDeleted: false,
-        },
-    });
+    const { items, error } = await fetchFaq();
 
     return (
         <section className="py-8">
@@ -22,9 +16,9 @@ const Page = async () => {
                             nemo ab praesentium.
                         </p>
                     </div>
-
                     <Faq data={items ?? {}} />
                 </div>
+                {error && <ServerErrorMessage />}
             </div>
         </section>
     );

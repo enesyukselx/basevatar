@@ -1,16 +1,12 @@
 import Link from "next/link";
 
 import "./assets/admin-layout.scss";
-import { redirect } from "next/navigation";
-import { isAdmin } from "@/app/utils/sessionHelpers";
 
 export default async function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    if (!(await isAdmin())) redirect("/");
-
     return (
         <div className="admin">
             <div className="container">

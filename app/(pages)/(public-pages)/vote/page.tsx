@@ -1,32 +1,22 @@
-import { prisma } from "@/app/lib/db";
-
+import fetchVotes from "@/app/actions/public-pages/fetch-votes";
 import Votes from "./components/Votes";
 import { getSession } from "@/app/utils/sessionHelpers";
+import ServerErrorMessage from "@/app/components/common/ServerErrorMessage";
 
 const Page = async () => {
     const session = await getSession();
 
-    const settings = await prisma.settings.findFirst({
-        where: {
-            key: "day",
-        },
-    });
+    const { colors, themes, settings, error } = await fetchVotes();
 
-    const colors = await prisma.votes.findMany({
-        where: {
-            type: "color",
-            day: Number(settings?.value) + 1 ?? 1,
-            isDeleted: false,
-        },
-    });
-
-    const themes = await prisma.votes.findMany({
-        where: {
-            type: "theme",
-            day: Number(settings?.value) + 1 ?? 1,
-            isDeleted: false,
-        },
-    });
+    if (error) {
+        return (
+            <section className="section-vote">
+                <div className="container">
+                    <ServerErrorMessage />
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="section-vote">
