@@ -11,9 +11,9 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
     const canvas = useRef<HTMLCanvasElement>(null);
 
     const [canvasProperties, setCanvasProperties] = useState<TCanvasProperties>({
-        width: 400,
-        height: 400,
-        pixelSize: 10,
+        width: 360,
+        height: 360,
+        pixelSize: 6,
         availableColors: ["#000000", "#ff0000", "#00ff00", "#0000ff"],
     });
 

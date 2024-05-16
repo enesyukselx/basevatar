@@ -8,8 +8,8 @@ import ImageViewer from "./ImageViewer";
 
 const Tools = ({ colors }: { colors: string[] }) => {
     const { canvasDatas, changeColor, undoPixels, zoomIn, zoomOut, clearCanvas, changeBackgroundColor } = useCanvas();
-
     const [activeColor, setActiveColor] = useState<string>(canvasDatas.currentColor);
+    const [imageViewer, setImageViewer] = useState<boolean>(false);
 
     const undoHandler = () => {
         const last = canvasDatas.history[canvasDatas.history.length - 1];
@@ -20,7 +20,7 @@ const Tools = ({ colors }: { colors: string[] }) => {
 
     return (
         <div className={classes.tools}>
-            <ImageViewer />
+            <ImageViewer visible={imageViewer} />
             <div className={classes.settings}>
                 <button onClick={zoomIn}>
                     <LucidePlus size={24} />
@@ -31,10 +31,11 @@ const Tools = ({ colors }: { colors: string[] }) => {
                 <button onClick={undoHandler}>
                     <LucideUndo size={24} />
                 </button>
-                <button>
-                    <LucideSave size={24} />
-                </button>
-                <button>
+                <button
+                    onClick={() => {
+                        setImageViewer(!imageViewer);
+                    }}
+                >
                     <LucideImage size={24} />
                 </button>
                 <button
@@ -43,6 +44,9 @@ const Tools = ({ colors }: { colors: string[] }) => {
                     }}
                 >
                     <LucideTrash2 size={24} />
+                </button>
+                <button>
+                    <LucideSave size={24} />
                 </button>
             </div>
 

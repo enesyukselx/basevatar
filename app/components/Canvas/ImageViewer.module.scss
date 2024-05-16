@@ -1,9 +1,9 @@
 .image-viewer {
-    @apply relative;
+    @apply absolute pointer-events-none;
     @apply border-2 border-white rounded-lg;
 
     .input {
-        @apply flex justify-between items-center gap-4 px-4 py-2;
+        @apply flex justify-between items-center gap-4 px-4 py-2 pointer-events-auto;
         @apply bg-white text-black;
 
         & > svg {
