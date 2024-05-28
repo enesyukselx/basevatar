@@ -11,52 +11,11 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
     const [width, setWidth] = useState<number>(300);
     const [height, setHeight] = useState<number>(300);
     const imageViewerRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState<boolean>(false);
+    const [cords, setCords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
-    const MouseDownHandler = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-        const startX = e.clientX;
-        const startY = e.clientY;
-        const imageViewer = imageViewerRef.current;
-        if (!imageViewer) return;
-        const startLeft = imageViewer.offsetLeft;
-        const startTop = imageViewer.offsetTop;
-        const onMouseMove = (e: MouseEvent) => {
-            const newLeft = startLeft + (e.clientX - startX);
-            const newTop = startTop + (e.clientY - startY);
-            imageViewer.style.left = `${newLeft}px`;
-            imageViewer.style.top = `${newTop}px`;
-        };
-        const onMouseUp = () => {
-            window.removeEventListener("mousemove", onMouseMove);
-            window.removeEventListener("mouseup", onMouseUp);
-        };
-        window.addEventListener("mousemove", onMouseMove);
-        window.addEventListener("mouseup", onMouseUp);
-    };
-
-    const TouchStartHandler = (e: React.TouchEvent<SVGSVGElement>) => {
-        const touch = e.touches[0];
-        const startX = touch.clientX;
-        const startY = touch.clientY;
-        const imageViewer = imageViewerRef.current;
-        if (!imageViewer) return;
-        const startLeft = imageViewer.offsetLeft;
-        const startTop = imageViewer.offsetTop;
-        const onTouchMove = (e: TouchEvent) => {
-            const touch = e.touches[0];
-            const newLeft = startLeft + (touch.clientX - startX);
-            const newTop = startTop + (touch.clientY - startY);
-            imageViewer.style.left = `${newLeft}px`;
-            imageViewer.style.top = `${newTop}px`;
-        };
-        const onTouchEnd = () => {
-            window.removeEventListener("touchmove", onTouchMove);
-            window.removeEventListener("touchend", onTouchEnd);
-        };
-        window.addEventListener("touchmove", onTouchMove);
-        window.addEventListener("touchend", onTouchEnd);
-    };
-
-    const ResizeMouseDownHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //Resize Events
+    const handleResizeMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const startX = e.clientX;
         const startY = e.clientY;
         const startWidth = width;
@@ -64,6 +23,8 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
         const onMouseMove = (e: MouseEvent) => {
             const newWidth = startWidth + (e.clientX - startX);
             const newHeight = startHeight + (e.clientY - startY);
+            if (newWidth < 200) return;
+            if (newHeight < 200) return;
             setWidth(newWidth);
             setHeight(newHeight);
         };
@@ -75,7 +36,7 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
         window.addEventListener("mouseup", onMouseUp);
     };
 
-    const ResizeTouchStartHandler = (e: React.TouchEvent<HTMLDivElement>) => {
+    const handleResizeTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
         const touch = e.touches[0];
         const startX = touch.clientX;
         const startY = touch.clientY;
@@ -85,6 +46,8 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
             const touch = e.touches[0];
             const newWidth = startWidth + (touch.clientX - startX);
             const newHeight = startHeight + (touch.clientY - startY);
+            if (newWidth < 200) return;
+            if (newHeight < 200) return;
             setWidth(newWidth);
             setHeight(newHeight);
         };
@@ -94,6 +57,54 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
         };
         window.addEventListener("touchmove", onTouchMove);
         window.addEventListener("touchend", onTouchEnd);
+    };
+
+    //Drag Events
+    const handleDragMouseDown = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+        setIsDragging(true);
+        setCords({ x: e.clientX, y: e.clientY });
+    };
+    const handleDragMouseMove = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+        if (!isDragging) return;
+        const imageViewer = imageViewerRef.current;
+        if (!imageViewer) return;
+        const newLeft = imageViewer.offsetLeft + (e.clientX - cords.x);
+        const newTop = imageViewer.offsetTop + (e.clientY - cords.y);
+        if (newLeft < 0) return;
+        if (newTop < 0) return;
+        imageViewer.style.left = `${newLeft}px`;
+        imageViewer.style.top = `${newTop}px`;
+        setCords({ x: e.clientX, y: e.clientY });
+    };
+    const handleDragMouseUp = () => {
+        setIsDragging(false);
+    };
+    const handleDragMouseLeave = () => {
+        setIsDragging(false);
+    };
+
+    const handleDragTouchStart = (e: React.TouchEvent<SVGSVGElement>) => {
+        const touch = e.touches[0];
+        setIsDragging(true);
+        setCords({ x: touch.clientX, y: touch.clientY });
+    };
+
+    const handleDragTouchMove = (e: React.TouchEvent<SVGSVGElement>) => {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        const imageViewer = imageViewerRef.current;
+        if (!imageViewer) return;
+        const newLeft = imageViewer.offsetLeft + (touch.clientX - cords.x);
+        const newTop = imageViewer.offsetTop + (touch.clientY - cords.y);
+        if (newLeft < 0) return;
+        if (newTop < 0) return;
+        imageViewer.style.left = `${newLeft}px`;
+        imageViewer.style.top = `${newTop}px`;
+        setCords({ x: touch.clientX, y: touch.clientY });
+    };
+
+    const handleDragTouchEnd = () => {
+        setIsDragging(false);
     };
 
     return (
@@ -111,14 +122,13 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
                 <LucideGrip
                     size={32}
                     color="black"
-                    onMouseDown={(e) => {
-                        e.preventDefault();
-                        MouseDownHandler(e);
-                    }}
-                    onTouchStart={(e) => {
-                        e.preventDefault();
-                        TouchStartHandler(e);
-                    }}
+                    onMouseDown={handleDragMouseDown}
+                    onMouseMove={handleDragMouseMove}
+                    onMouseUp={handleDragMouseUp}
+                    onMouseLeave={handleDragMouseLeave}
+                    onTouchStart={handleDragTouchStart}
+                    onTouchMove={handleDragTouchMove}
+                    onTouchEnd={handleDragTouchEnd}
                 />
                 <input
                     type="text"
@@ -160,14 +170,8 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
             </div>
             <div
                 className="absolute -bottom-2 -right-2 bg-white rounded-full w-4 h-4 border border-black shadow-lg cursor-nwse-resize pointer-events-auto"
-                onMouseDown={(e) => {
-                    e.preventDefault();
-                    ResizeMouseDownHandler(e);
-                }}
-                onTouchStart={(e) => {
-                    e.preventDefault();
-                    ResizeTouchStartHandler(e);
-                }}
+                onMouseDown={handleResizeMouseDown}
+                onTouchStart={handleResizeTouchStart}
             ></div>
         </div>
     );
