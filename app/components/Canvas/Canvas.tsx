@@ -27,7 +27,6 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
         const x = Math.floor((e.touches[0].clientX - rect.left) / canvasProperties.pixelSize);
         const y = Math.floor((e.touches[0].clientY - rect.top) / canvasProperties.pixelSize);
         if (lastDraw.x !== x.toString() || lastDraw.y !== y.toString()) {
-            console.log(x, y);
             addPixel({ [`${x},${y}`]: canvasDatas.currentColor });
             setLastDraw({
                 ...lastDraw,
