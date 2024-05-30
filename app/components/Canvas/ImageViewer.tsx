@@ -61,26 +61,26 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
 
     //Drag Events
     const handleDragMouseDown = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-        setIsDragging(true);
-        setCords({ x: e.clientX, y: e.clientY });
-    };
-    const handleDragMouseMove = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-        if (!isDragging) return;
+        const startX = e.clientX;
+        const startY = e.clientY;
         const imageViewer = imageViewerRef.current;
         if (!imageViewer) return;
-        const newLeft = imageViewer.offsetLeft + (e.clientX - cords.x);
-        const newTop = imageViewer.offsetTop + (e.clientY - cords.y);
-        if (newLeft < 0) return;
-        if (newTop < 0) return;
-        imageViewer.style.left = `${newLeft}px`;
-        imageViewer.style.top = `${newTop}px`;
-        setCords({ x: e.clientX, y: e.clientY });
-    };
-    const handleDragMouseUp = () => {
-        setIsDragging(false);
-    };
-    const handleDragMouseLeave = () => {
-        setIsDragging(false);
+        const startLeft = imageViewer.offsetLeft;
+        const startTop = imageViewer.offsetTop;
+        const onMouseMove = (e: MouseEvent) => {
+            const newLeft = startLeft + (e.clientX - startX);
+            const newTop = startTop + (e.clientY - startY);
+            if (newLeft < 0) return;
+            if (newTop < 0) return;
+            imageViewer.style.left = `${newLeft}px`;
+            imageViewer.style.top = `${newTop}px`;
+        };
+        const onMouseUp = () => {
+            window.removeEventListener("mousemove", onMouseMove);
+            window.removeEventListener("mouseup", onMouseUp);
+        };
+        window.addEventListener("mousemove", onMouseMove);
+        window.addEventListener("mouseup", onMouseUp);
     };
 
     const handleDragTouchStart = (e: React.TouchEvent<SVGSVGElement>) => {
@@ -103,10 +103,6 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
         setCords({ x: touch.clientX, y: touch.clientY });
     };
 
-    const handleDragTouchEnd = () => {
-        setIsDragging(false);
-    };
-
     return (
         <div
             className={classes["image-viewer"]}
@@ -123,12 +119,9 @@ const ImageViewer = ({ visible }: { visible: boolean }) => {
                     size={32}
                     color="black"
                     onMouseDown={handleDragMouseDown}
-                    onMouseMove={handleDragMouseMove}
-                    onMouseUp={handleDragMouseUp}
-                    onMouseLeave={handleDragMouseLeave}
                     onTouchStart={handleDragTouchStart}
                     onTouchMove={handleDragTouchMove}
-                    onTouchEnd={handleDragTouchEnd}
+                    onTouchEnd={() => setIsDragging(false)}
                 />
                 <input
                     type="text"
