@@ -34,39 +34,43 @@ export async function GET() {
                 },
             });
 
-            if (colorVotes.length === 0 || themeVotes.length === 0) {
+            // Update Color
+            if (colorVotes.length !== 0) {
                 //
+                const maxCountColor = colorVotes.reduce((maxItem, currentItem) => {
+                    return currentItem.count > maxItem.count ? currentItem : maxItem;
+                }, colorVotes[0]);
+
+                await prisma.settings.update({
+                    where: {
+                        id: color.id,
+                    },
+                    data: {
+                        value: maxCountColor.value.join(","),
+                    },
+                });
             }
+            // Update Theme
+            if (themeVotes.length !== 0) {
+                //
+                const maxCountTheme = themeVotes.reduce((maxItem, currentItem) => {
+                    return currentItem.count > maxItem.count ? currentItem : maxItem;
+                }, themeVotes[0]);
 
-            const maxCountTheme = themeVotes.reduce((maxItem, currentItem) => {
-                return currentItem.count > maxItem.count ? currentItem : maxItem;
-            }, themeVotes[0]);
-
-            const maxCountColor = colorVotes.reduce((maxItem, currentItem) => {
-                return currentItem.count > maxItem.count ? currentItem : maxItem;
-            }, colorVotes[0]);
-
-            await prisma.settings.update({
-                where: {
-                    id: theme.id,
-                },
-                data: {
-                    value: maxCountTheme.value[0],
-                },
-            });
-
-            await prisma.settings.update({
-                where: {
-                    id: color.id,
-                },
-                data: {
-                    value: maxCountColor.value.join(","),
-                },
-            });
+                await prisma.settings.update({
+                    where: {
+                        id: theme.id,
+                    },
+                    data: {
+                        value: maxCountTheme.value[0],
+                    },
+                });
+            }
 
             date.setHours(23, 59, 59, 999);
             const new_finish_time = date.getTime() + 1;
 
+            // Update day
             await prisma.settings.update({
                 where: {
                     id: day.id,
@@ -76,6 +80,7 @@ export async function GET() {
                 },
             });
 
+            // Update finish time
             await prisma.settings.update({
                 where: {
                     id: finish_time.id,
@@ -89,8 +94,6 @@ export async function GET() {
                 message: "Updated new timestamp",
                 new_day: parseInt(day.value) + 1,
                 new_finish_time,
-                new_theme: maxCountTheme.value[0],
-                new_color: maxCountColor.value.join(","),
             });
         } else {
             return Response.json({
