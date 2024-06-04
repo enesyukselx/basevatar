@@ -1,4 +1,4 @@
-import fetchSettings from "@/app/actions/admin/fetch-settings";
+import fetchSettings from "@/app/actions/common/fetch-settings";
 
 const Page = async () => {
     const { settings, error } = await fetchSettings();
