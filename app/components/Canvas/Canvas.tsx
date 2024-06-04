@@ -4,13 +4,32 @@ import useCanvas from "@/app/hooks/useCanvas";
 import Tools from "./Tools";
 import { useEffect, useState } from "react";
 
-const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
+const Canvas = ({ theme, colors, day }: { theme: string; colors: string; day: string }) => {
     //
-    const { canvas, canvasDatas, canvasProperties, addPixel, addHistory, updateAvailableColors, updateLocalStorage } =
-        useCanvas();
+    const {
+        canvas,
+        canvasDatas,
+        canvasProperties,
+        addPixel,
+        addHistory,
+        updateAvailableColors,
+        updateDay,
+        updateLocalStorage,
+        clearCanvas,
+        changeBackgroundColor,
+    } = useCanvas();
 
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
     const [lastDraw, setLastDraw] = useState<Record<string, string>>({});
+
+    useEffect(() => {
+        if (canvasDatas.day === "") return;
+        if (canvasDatas.day !== day) {
+            clearCanvas();
+            changeBackgroundColor(colors.split(",")[0]);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [canvasDatas.day, day]);
 
     useEffect(() => {
         updateAvailableColors(colors.split(","));
@@ -18,7 +37,10 @@ const Canvas = ({ theme, colors }: { theme: string; colors: string }) => {
     }, []);
 
     useEffect(() => {
-        if (isDrawing) updateLocalStorage();
+        if (isDrawing) {
+            updateDay(day);
+            updateLocalStorage();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isDrawing]);
 

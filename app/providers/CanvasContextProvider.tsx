@@ -23,6 +23,7 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
         history: [],
         backgroundColor: "#ffffff",
         currentColor: "black",
+        day: "",
     });
 
     useEffect(() => {
@@ -32,6 +33,7 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
                 history: [],
                 backgroundColor: canvasProperties.availableColors[0],
                 currentColor: canvasProperties.availableColors[1],
+                day: "",
             };
 
             if (localStorage.getItem("basecanvas")) {
@@ -41,7 +43,8 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
                     decryptedData.hasOwnProperty("pixelData") &&
                     decryptedData.hasOwnProperty("history") &&
                     decryptedData.hasOwnProperty("backgroundColor") &&
-                    decryptedData.hasOwnProperty("currentColor")
+                    decryptedData.hasOwnProperty("currentColor") &&
+                    decryptedData.hasOwnProperty("day")
                 )
                     canvasData = decryptedData || canvasData;
             }
@@ -182,6 +185,14 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
         });
     };
 
+    const updateDay = (day: string) => {
+        setCanvasDatas((prev) => {
+            const canvasData = { ...prev, day: day };
+            updateLocalStorage(canvasData);
+            return { ...prev, day: day };
+        });
+    };
+
     const updateLocalStorage = async (data?: TCanvasDatas) => {
         if (!data) {
             localStorage.setItem("basecanvas", await encryptCanvasData(canvasDatas));
@@ -203,6 +214,7 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
         changeColor,
         zoomIn,
         zoomOut,
+        updateDay,
         updateLocalStorage,
     };
 
