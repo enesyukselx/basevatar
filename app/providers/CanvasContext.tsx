@@ -32,6 +32,7 @@ export interface ICanvasContext {
     zoomOut: () => void;
     updateDay: (day: string) => void;
     updateLocalStorage: () => void;
+    saveImageHandler: () => void;
 }
 
 const CanvasContext = createContext<ICanvasContext>({
@@ -61,6 +62,7 @@ const CanvasContext = createContext<ICanvasContext>({
     zoomOut: () => {},
     updateDay: () => {},
     updateLocalStorage: () => {},
+    saveImageHandler: () => {},
 });
 
 export default CanvasContext;

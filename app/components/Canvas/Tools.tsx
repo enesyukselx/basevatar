@@ -16,6 +16,7 @@ const Tools = ({ colors }: { colors: string[] }) => {
         zoomOut,
         clearCanvas,
         changeBackgroundColor,
+        saveImageHandler
     } = useCanvas();
     const [activeColor, setActiveColor] = useState<string>(canvasDatas.currentColor);
     const [imageViewer, setImageViewer] = useState<boolean>(false);
@@ -55,7 +56,9 @@ const Tools = ({ colors }: { colors: string[] }) => {
                 >
                     <LucideTrash2 size={24} />
                 </button>
-                <button>
+                <button onClick={() => {
+                    saveImageHandler();
+                }}>
                     <LucideSave size={24} />
                 </button>
             </div>

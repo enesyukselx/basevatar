@@ -201,6 +201,12 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem("basecanvas", await encryptCanvasData(data));
     };
 
+    const saveImageHandler = () => {
+        if(!canvas.current) return;
+        alert("Save Image Handler");
+        console.log(canvas.current.toDataURL()); // Image Data URL
+    };
+
     const values: ICanvasContext = {
         canvas,
         canvasProperties,
@@ -216,6 +222,7 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
         zoomOut,
         updateDay,
         updateLocalStorage,
+        saveImageHandler
     };
 
     return <CanvasContext.Provider value={values}>{children}</CanvasContext.Provider>;
