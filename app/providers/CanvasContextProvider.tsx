@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import CanvasContext, { ICanvasContext, TCanvasDatas, TCanvasProperties } from "./CanvasContext";
 import CryptoJS from "crypto-js";
+import { uploadImageToServer } from "../actions/public-pages/canvas-actions";
 
 const _key = process.env.NEXT_PUBLIC_LOCALSTORAGE_KEY ?? "secret_key";
 
@@ -203,8 +204,10 @@ const CanvasContextProvider = ({ children }: { children: ReactNode }) => {
 
     const saveImageHandler = () => {
         if(!canvas.current) return;
-        alert("Save Image Handler");
-        console.log(canvas.current.toDataURL()); // Image Data URL
+        const canvasBase64 = canvas.current.toDataURL();
+        uploadImageToServer(canvasBase64).then((res) => {
+            console.log("Image uploaded to server", res);
+        });
     };
 
     const values: ICanvasContext = {
