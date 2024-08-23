@@ -26,7 +26,7 @@ export async function uploadImageToServer(data: string) {
         await postNewSlackMessage(
             slackConservationId,
             `New saved image from ${userAddress} on *day ${day}*:
-${process.env.NEXT_PUBLIC_BASE_URL + s3Url}
+https://${process.env.AWS_S3_URL}/${s3Url}
             `
         );
 
