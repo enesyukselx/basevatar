@@ -12,7 +12,6 @@ const s3Client = new S3Client({
 
 async function uploadFileToS3(buffer: Buffer, fileName: string): Promise<string> {
     const fileBuffer = buffer;
-    console.log(fileName);
 
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME || "",
@@ -52,7 +51,6 @@ export const POST = async (req: NextRequest) => {
                 fileName,
             });
         } catch (error) {
-            console.log(error);
             return NextResponse.json({ message: "File upload failed" }, { status: 500 });
         }
     } catch (error) {
