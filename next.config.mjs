@@ -13,6 +13,11 @@ const nextConfig = {
                 hostname: "basepaint.xyz",
                 port: "",
             },
+            {
+                protocol: "https",
+                hostname: process.env.AWS_S3_URL,
+                port: "",
+            },
         ],
     },
 };

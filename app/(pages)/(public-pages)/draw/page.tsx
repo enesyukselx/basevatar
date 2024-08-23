@@ -37,7 +37,12 @@ const Page = async () => {
                             <div className="py-4 text-red-300 font-bold">
                                 You have already uploaded an image for today. Please come back tomorrow.
                                 <div className="text-white py-2">Your draw</div>
-                                <Image width={360} height={360} src={userHasAlreadyUploaded.url} alt="image" />
+                                <Image
+                                    width={360}
+                                    height={360}
+                                    src={"https://" + process.env.AWS_S3_URL + "/" + userHasAlreadyUploaded.url}
+                                    alt="image"
+                                />
                             </div>
                         )}
                         {!drawError && session && session.address && !userHasAlreadyUploaded && (
@@ -59,7 +64,12 @@ const Page = async () => {
                                     {pastDraws.map((draw) => (
                                         <div key={draw.id} className="card">
                                             <div>DAY {draw.day}</div>
-                                            <Image src={draw.url} width={150} height={150} alt={`day-${draw.day}`} />
+                                            <Image
+                                                src={"https://" + process.env.AWS_S3_URL + "/" + draw.url}
+                                                width={150}
+                                                height={150}
+                                                alt={`day-${draw.day}`}
+                                            />
                                         </div>
                                     ))}
                                 </div>
