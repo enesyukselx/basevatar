@@ -2,14 +2,14 @@ import Link from "next/link";
 import Votes from "../components/Votes/Votes";
 import fetchVotes from "@/app/actions/admin/fetch-votes";
 
-const Page = async ({
-    searchParams,
-}: {
-    searchParams: {
-        day: string;
-    };
-}) => {
-    const { votes, day, error } = await fetchVotes({ param: searchParams.day });
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+const Page = async (props: { searchParams: SearchParams }) => {
+    //
+    const searchParams = await props.searchParams;
+    const dayParam = searchParams.day as string;
+
+    const { votes, day, error } = await fetchVotes({ param: dayParam });
 
     return (
         <section className="section-vote-admin">
@@ -17,21 +17,21 @@ const Page = async ({
                 <h1 className="title">Vote Settings</h1>
                 <p className="subtitle">You can manage the vote section here. You can add, edit, and delete votes.</p>
                 <p className="subtitle">
-                    <strong>Current Day:</strong> {day}
+                    <strong>Current Day:</strong> {dayParam}
                 </p>
             </div>
             <div className="flex gap-2 mt-2">
-                {searchParams.day !== day && (
+                {dayParam !== day && (
                     <Link href={`/admin/votes?day=${day}`} className="btn px-3 py-1">
                         Today
                     </Link>
                 )}
-                {+searchParams.day > 1 && (
-                    <Link href={`/admin/votes?day=${+day - 1}`} className="btn px-3 py-1">
+                {+dayParam > 1 && (
+                    <Link href={`/admin/votes?day=${+dayParam - 1}`} className="btn px-3 py-1">
                         Previous Day
                     </Link>
                 )}
-                <Link href={`/admin/votes?day=${+day + 1}`} className="btn px-3 py-1">
+                <Link href={`/admin/votes?day=${+dayParam + 1}`} className="btn px-3 py-1">
                     Next Day
                 </Link>
             </div>
