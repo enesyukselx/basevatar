@@ -9,7 +9,7 @@ const fetchVotes = async () => {
         const colors = await prisma.vote.findMany({
             where: {
                 type: "color",
-                day: Number(day) + 1 ?? 1,
+                day: Number(day) + 1 || 1,
                 isDeleted: false,
             },
         });
@@ -17,7 +17,7 @@ const fetchVotes = async () => {
         const themes = await prisma.vote.findMany({
             where: {
                 type: "theme",
-                day: Number(day) + 1 ?? 1,
+                day: Number(day) + 1 || 1,
                 isDeleted: false,
             },
         });
