@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 
 import classes from "./VoteForm.module.scss";
 import Link from "next/link";
 import ColorPicker from "./ColorPicker";
-import { useFormState } from "react-dom";
 import { TFormState } from "@/app/types";
 import voteAction from "@/app/actions/admin/vote-action";
 import SubmitButton from "../SubmitButton";
@@ -13,7 +12,7 @@ import SubmitButton from "../SubmitButton";
 const VoteForm = ({ day }: { day: string }) => {
     //
     const [voteType, setVoteType] = useState<"color" | "theme">("theme");
-    const [state, action] = useFormState((prevState: TFormState, data: FormData) => voteAction(prevState, data), {
+    const [state, action] = useActionState((prevState: TFormState, data: FormData) => voteAction(prevState, data), {
         message: "",
         errors: {},
     });
