@@ -8,7 +8,7 @@ type TSessionData = {
 } | null;
 
 export const getSession = async (): Promise<TSessionData> => {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const encryptedSession = cookieStore.get("web3session")?.value;
 
     const session: TSessionData = encryptedSession
