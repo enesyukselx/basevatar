@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { unsealData } from "iron-session/edge";
+import { unsealData } from "iron-session";
 
 type TSessionData = {
     nonce: string;
