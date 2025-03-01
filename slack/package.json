@@ -16,14 +16,14 @@
     "@types/node": "^22.13.8",
     "nodemon": "^3.1.9",
     "npm-run-all": "^4.1.5",
-    "prisma": "^5.21.0",
+    "prisma": "^6.4.1",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
     "dotenv": "^16.4.7"
   },
   "dependencies": {
-    "@prisma/client": "^5.21.0",
-    "@slack/bolt": "^3.22.0"
+    "@prisma/client": "^6.4.1",
+    "@slack/bolt": "^4.2.1"
   }
 }
