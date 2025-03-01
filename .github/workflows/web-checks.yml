@@ -1,8 +1,10 @@
-name: "/web checks"
+name: "Lint Checks (Web)"
+
 on:
     push:
         paths:
             - "web/**"
+
 jobs:
     lint:
         name: Lint
