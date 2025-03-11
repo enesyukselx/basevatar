@@ -7,7 +7,7 @@ on:
 
 jobs:
     lint:
-        name: Lint
+        name: Typecheck - Lint
         runs-on: ubuntu-22.04
         defaults:
             run:
@@ -20,4 +20,5 @@ jobs:
                   cache: "npm"
                   cache-dependency-path: "web/package-lock.json"
             - run: npm install
+            - run: npm run typecheck
             - run: npm run lint
