@@ -1,59 +1,83 @@
 version: 2
 updates:
+    # "/web"
     - package-ecosystem: "npm"
       directory: "/web"
       schedule:
           interval: "weekly"
           day: "saturday"
-      open-pull-requests-limit: 15
+      commit-message:
+          prefix: "chore(web)"
+      reviewers:
+          - "enesyukselx"
+      assignees:
+          - "enesyukselx"
       labels:
           - "dependencies"
           - "web"
-      commit-message:
-          prefix: "chore(web)"
-          include: "scope"
       groups:
-          minor-patches:
+          security-updates:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          minor-updates:
+              applies-to: version-updates
               patterns:
                   - "*"
               update-types:
                   - "minor"
                   - "patch"
 
+    # "/cronjob"
     - package-ecosystem: "npm"
       directory: "/cronjob"
       schedule:
           interval: "weekly"
           day: "saturday"
-      open-pull-requests-limit: 15
+      commit-message:
+          prefix: "chore(cronjob)"
+      reviewers:
+          - "enesyukselx"
+      assignees:
+          - "enesyukselx"
       labels:
           - "dependencies"
           - "cronjob"
-      commit-message:
-          prefix: "chore(cronjob)"
-          include: "scope"
       groups:
-          minor-patches:
+          security-updates:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          minor-updates:
+              applies-to: version-updates
               patterns:
                   - "*"
               update-types:
                   - "minor"
                   - "patch"
 
+    # "/slack"
     - package-ecosystem: "npm"
       directory: "/slack"
       schedule:
           interval: "weekly"
           day: "saturday"
-      open-pull-requests-limit: 15
+      commit-message:
+          prefix: "chore(slack)"
+      reviewers:
+          - "enesyukselx"
+      assignees:
+          - "enesyukselx"
       labels:
           - "dependencies"
           - "slack"
-      commit-message:
-          prefix: "chore(slack)"
-          include: "scope"
       groups:
-          minor-patches:
+          security-updates:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          minor-updates:
+              applies-to: version-updates
               patterns:
                   - "*"
               update-types:
