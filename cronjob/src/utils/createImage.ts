@@ -27,7 +27,7 @@ const createImage = async (day: number, colors: string, theme: string) => {
             if (i >= 100) break;
             const filename = `${i}.jpg`;
             await downloadImage(
-                (`https://${process.env.AWS_S3_URL}` || "http://localhost:3000") + "/" + image.url,
+                `https://${process.env.AWS_S3_URL ? process.env.AWS_S3_URL : "localhost:3000"}` + "/" + image.url,
                 filename
             );
             i++;
@@ -51,8 +51,8 @@ const downloadImage = async (url: string, filename: string) => {
         responseType: "stream",
     });
     response.data.pipe(writer);
-    return new Promise((resolve, reject) => {
-        writer.on("finish", resolve);
+    return new Promise<void>((resolve, reject) => {
+        writer.on("finish", () => resolve());
         writer.on("error", reject);
     });
 };

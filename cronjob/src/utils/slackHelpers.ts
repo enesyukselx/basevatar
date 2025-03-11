@@ -25,7 +25,7 @@ const postNewDayMessage = async (day: number, finishTime: number, color: string,
 const uploadOutputImage = async (outputPath: string, day: number) => {
     const web = new WebClient(token);
     try {
-        const uploadResult = await web.filesUploadV2({
+        await web.filesUploadV2({
             channel_id: cronjobConservationId,
             initial_comment: "Today's output image.",
             file: fs.createReadStream(outputPath),

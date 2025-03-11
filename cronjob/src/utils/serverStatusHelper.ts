@@ -4,7 +4,7 @@ const serverStatusHelper = async () => {
     try {
         const response = await axios.get(process.env.SERVER_URL || "http://localhost:3000");
         return response.status === 200;
-    } catch (e) {
+    } catch {
         console.log("Server is not running.");
         return false;
     }
