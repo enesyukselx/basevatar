@@ -1,4 +1,5 @@
 import "dotenv/config";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require("dotenv").config();
 import { App } from "@slack/bolt";
 import { commands } from "./commands";

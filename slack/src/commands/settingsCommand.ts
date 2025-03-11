@@ -2,6 +2,7 @@ import { app } from "../index";
 import { getSettings } from "../services/settingService";
 
 const settingsCommand = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     app.command("/settings", async ({ command, ack, say }) => {
         //
         const settings = await getSettings();
