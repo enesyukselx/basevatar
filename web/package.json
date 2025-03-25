@@ -28,7 +28,7 @@
         "next": "^15.2.3",
         "next-auth": "^4.24.11",
         "nextjs-toploader": "^3.7.15",
-        "react": "^18.3.1",
+        "react": "^19.0.0",
         "react-dom": "^18.3.1",
         "react-toastify": "^10.0.6",
         "sharp": "^0.33.5",
@@ -41,7 +41,7 @@
     },
     "devDependencies": {
         "@types/node": "^22.13.11",
-        "@types/react": "^18",
+        "@types/react": "^19",
         "@types/react-dom": "^18",
         "autoprefixer": "^10.4.21",
         "eslint": "^9.23.0",
