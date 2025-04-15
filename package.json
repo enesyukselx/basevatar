@@ -19,8 +19,7 @@
     },
     "prisma": {
         "schema": "packages/database/prisma/schema.prisma",
-        "seed": "tsx packages/database/src/seed.ts",
-        "generate": "turbo db:generate"
+        "seed": "tsx packages/database/src/seed.ts"
     },
     "author": "",
     "license": "ISC",
