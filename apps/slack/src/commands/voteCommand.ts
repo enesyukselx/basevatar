@@ -10,7 +10,7 @@ const voteCommand = async () => {
         await ack();
         const voteType = command.text.split(" ")[0] as VoteType;
         const voteValue = command.text.split(" ")[1];
-        const voteDayValue = command.text.split(" ")[2] ? +command.text.split(" ")[2] : undefined;
+        const voteDayValue = command.text.split(" ")[2] ? +!command.text.split(" ")[2] : undefined;
         const day = (await getDay()) ?? 1;
         const voteDay = voteDayValue ?? (day ? +day + 2 : undefined);
 

@@ -28,11 +28,11 @@ export async function cronjob() {
             const themeVotes = await getVotes(+day.value + 1, "theme");
 
             // Update Color
-            if (colorVotes && colorVotes.votes.length !== 0) {
+            if (colorVotes && colorVotes.votes.length !== 0 && colorVotes.maxCountItem) {
                 await updateSettings(color.id, colorVotes.maxCountItem);
             }
             // Update Theme
-            if (themeVotes && themeVotes.votes.length !== 0) {
+            if (themeVotes && themeVotes.votes.length !== 0 && themeVotes.maxCountItem) {
                 await updateSettings(theme.id, themeVotes.maxCountItem);
             }
 
@@ -48,7 +48,12 @@ export async function cronjob() {
             // Update finish time
             await updateSettings(finish_time.id, new_finish_time.toString());
             if (!colorVotes || !themeVotes) return;
-            await postNewDayMessage(+day.value + 1, new_finish_time, colorVotes.maxCountItem, themeVotes.maxCountItem);
+            await postNewDayMessage(
+                +day.value + 1,
+                new_finish_time,
+                colorVotes.maxCountItem || color.value,
+                themeVotes.maxCountItem || theme.value
+            );
 
             console.log("Successfully updated");
         } else {

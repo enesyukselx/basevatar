@@ -11,6 +11,7 @@ const getVotes = async (day: number, type: "color" | "theme") => {
         });
 
         const maxCount = votes.reduce((maxItem, currentItem) => {
+            if (!maxItem) return currentItem;
             return currentItem.count > maxItem.count ? currentItem : maxItem;
         }, votes[0]);
 
