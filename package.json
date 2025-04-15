@@ -9,7 +9,7 @@
         "lint": "turbo lint",
         "typecheck": "turbo typecheck",
         "clean": "turbo clean",
-        "db:generate": "turbo db:generate",
+        "generate": "turbo run generate",
         "db:seed": "turbo db:seed",
         "start": "turbo start"
     },

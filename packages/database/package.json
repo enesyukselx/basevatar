@@ -6,6 +6,7 @@
         ".": "./src/client.ts"
     },
     "scripts": {
+        "generate": "prisma generate",
         "db:seed": "tsx src/seed.ts",
         "typecheck": "tsc -b",
         "format": "prisma format",
