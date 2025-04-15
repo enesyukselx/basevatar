@@ -1,5 +1,5 @@
 "use server";
-import { prisma } from "@/app/lib/db";
+import { prisma } from "@basevatar/database";
 
 const fetchMint = async () => {
     try {

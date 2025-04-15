@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/app/lib/db";
+import { prisma } from "@basevatar/database";
 import { isTransactionValid } from "@/app/utils/isTransactionValid";
 import { getSession, isSessionValid } from "@/app/utils/sessionHelpers";
 import { postNewSlackMessage } from "@/app/utils/slackHelpers";

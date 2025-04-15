@@ -10,11 +10,16 @@
         "typecheck": "turbo typecheck",
         "clean": "turbo clean",
         "db:generate": "turbo db:generate",
+        "db:seed": "turbo db:seed",
         "start": "turbo start"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/enesyukselx/basevatar.git"
+    },
+    "prisma": {
+        "schema": "packages/database/prisma/schema.prisma",
+        "seed": "tsx packages/database/src/seed.ts"
     },
     "author": "",
     "license": "ISC",
@@ -24,10 +29,14 @@
     "homepage": "https://github.com/enesyukselx/basevatar#readme",
     "description": "",
     "devDependencies": {
-        "turbo": "^2.5.0"
+        "turbo": "^2.5.0",
+        "prisma": "^6.6.0"
     },
     "workspaces": [
         "apps/*",
         "packages/*"
-    ]
+    ],
+    "dependencies": {
+        "@prisma/client": "^6.6.0"
+    }
 }

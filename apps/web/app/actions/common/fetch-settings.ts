@@ -1,5 +1,5 @@
 "use server";
-import { prisma } from "@/app/lib/db";
+import { prisma } from "@basevatar/database";
 
 type TSettingKey = "day" | "theme" | "color" | "finish_time";
 interface ISettingResponse {

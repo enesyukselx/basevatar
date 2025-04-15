@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/app/lib/db";
+import { prisma } from "@basevatar/database";
 import { redirect } from "next/navigation";
 
 import { voteValidationSchema } from "@/app/lib/validationSchemas";

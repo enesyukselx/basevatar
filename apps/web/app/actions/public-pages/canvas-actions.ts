@@ -1,6 +1,6 @@
 "use server";
 import { v4 as uuidv4 } from "uuid";
-import { prisma } from "@/app/lib/db";
+import { prisma } from "@basevatar/database";
 import { getSession } from "@/app/utils/sessionHelpers";
 import { postNewSlackMessage } from "@/app/utils/slackHelpers";
 import fetchSettings from "../common/fetch-settings";

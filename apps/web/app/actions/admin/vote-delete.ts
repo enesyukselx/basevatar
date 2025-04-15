@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/app/lib/db";
+import { prisma } from "@basevatar/database";
 import { isAdmin } from "@/app/utils/sessionHelpers";
 import { redirect } from "next/navigation";
 

@@ -1,4 +1,4 @@
-import { prisma } from "../lib/db";
+import { prisma } from "@basevatar/database";
 import sharp from "sharp";
 import fs from "fs";
 import path from "path";

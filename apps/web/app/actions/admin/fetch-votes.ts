@@ -1,5 +1,5 @@
 "use server";
-import { prisma } from "@/app/lib/db";
+import { prisma } from "@basevatar/database";
 import fetchSettings from "../common/fetch-settings";
 
 const fetchVotes = async ({ param }: { param: string }) => {

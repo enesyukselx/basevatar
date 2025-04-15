@@ -1,4 +1,4 @@
-import { prisma } from "../lib/db";
+import { prisma } from "@basevatar/database";
 
 type VoteType = "color" | "theme";
 
