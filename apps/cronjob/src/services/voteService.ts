@@ -10,8 +10,6 @@ const getVotes = async (day: number, type: "color" | "theme") => {
             },
         });
 
-        console.log("votes", votes);
-
         const maxCount = votes.reduce((maxItem, currentItem) => {
             if (!maxItem) return currentItem;
             return currentItem.count > maxItem.count ? currentItem : maxItem;

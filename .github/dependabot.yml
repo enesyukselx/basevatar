@@ -83,3 +83,59 @@ updates:
               update-types:
                   - "minor"
                   - "patch"
+
+    # "root"
+    - package-ecosystem: "npm"
+      directory: "/"
+      schedule:
+          interval: "monthly"
+          day: "monday"
+      commit-message:
+          prefix: "chore(root)"
+      reviewers:
+          - "enesyukselx"
+      assignees:
+          - "enesyukselx"
+      labels:
+          - "dependencies"
+          - "root"
+      groups:
+          security-updates:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          minor-updates:
+              applies-to: version-updates
+              patterns:
+                  - "*"
+              update-types:
+                  - "minor"
+                  - "patch"
+
+    # "/packages/prisma"
+    - package-ecosystem: "npm"
+      directory: "/packages/prisma"
+      schedule:
+          interval: "monthly"
+          day: "monday"
+      commit-message:
+          prefix: "chore(database)"
+      reviewers:
+          - "enesyukselx"
+      assignees:
+          - "enesyukselx"
+      labels:
+          - "dependencies"
+          - "database"
+      groups:
+          security-updates:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          minor-updates:
+              applies-to: version-updates
+              patterns:
+                  - "*"
+              update-types:
+                  - "minor"
+                  - "patch"
