@@ -20,12 +20,6 @@
                 "AWS_S3_URL"
             ]
         },
-        "typecheck": {
-            "outputs": []
-        },
-        "lint": {
-            "outputs": []
-        },
         "dev": {
             "dependsOn": ["^db:generate"],
             "cache": false,
@@ -43,6 +37,12 @@
         "db:seed": {
             "dependsOn": ["^db:seed"],
             "cache": false
+        },
+        "typecheck": {
+            "outputs": []
+        },
+        "lint": {
+            "outputs": []
         },
         "clean": {
             "cache": false
