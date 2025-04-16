@@ -2,22 +2,21 @@
     "name": "slack",
     "version": "1.0.0",
     "main": "index.js",
+    "type": "module",
     "scripts": {
-        "clean": "rimraf ./dist",
-        "build": "npm run clean && tsc -b",
-        "start": "node ./dist/src",
-        "dev": "ts-node src",
+        "build": "tsup",
+        "start": "node dist/index.cjs",
+        "dev": "tsup --watch --onSuccess \"node dist/index.cjs\"",
         "lint": "eslint --ext .ts src",
-        "typecheck": "tsc -b",
-        "dev:watch": "nodemon src -e ts,json --exec 'npm run local'"
+        "typecheck": "tsc -b"
     },
     "author": "",
     "license": "ISC",
     "description": "",
     "devDependencies": {
+        "@basevatar/database": "*",
         "@basevatar/eslint-config": "*",
         "@basevatar/typescript-config": "*",
-        "@basevatar/database": "*",
         "@types/node": "^22.13.16",
         "dotenv": "^16.4.7",
         "eslint": "^9.23.0",
@@ -25,6 +24,7 @@
         "npm-run-all": "^4.1.5",
         "rimraf": "^6.0.1",
         "ts-node": "^10.9.2",
+        "tsup": "^8.4.0",
         "typescript": "^5.8.2"
     },
     "dependencies": {
