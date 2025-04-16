@@ -1,9 +1,9 @@
-name: "Typecheck + Lint Checks (Slack)"
+name: "Typecheck + Lint Checks (@basevatar/database)"
 
 on:
     push:
         paths:
-            - "apps/slack/**"
+            - "packages/database/**"
 
 jobs:
     lint:
@@ -17,4 +17,4 @@ jobs:
                   cache: "npm"
                   cache-dependency-path: "package-lock.json"
             - run: npm install
-            - run: npx turbo run typecheck lint --filter=slack
+            - run: npx turbo run typecheck lint --filter=@basevatar/database

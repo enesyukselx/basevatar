@@ -1,0 +1,42 @@
+{
+    "name": "basevatar",
+    "version": "1.0.0",
+    "private": true,
+    "packageManager": "npm@10.9.2",
+    "scripts": {
+        "build": "turbo build",
+        "dev": "turbo dev",
+        "lint": "turbo lint",
+        "typecheck": "turbo typecheck",
+        "clean": "turbo clean",
+        "db:generate": "turbo run db:generate",
+        "db:seed": "turbo db:seed",
+        "start": "turbo start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/enesyukselx/basevatar.git"
+    },
+    "prisma": {
+        "schema": "packages/database/prisma/schema.prisma",
+        "seed": "tsx packages/database/src/seed.ts"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/enesyukselx/basevatar/issues"
+    },
+    "homepage": "https://github.com/enesyukselx/basevatar#readme",
+    "description": "",
+    "devDependencies": {
+        "turbo": "^2.5.0",
+        "prisma": "^6.6.0"
+    },
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "dependencies": {
+        "@prisma/client": "^6.6.0"
+    }
+}

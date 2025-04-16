@@ -1,0 +1,30 @@
+{
+    "name": "@basevatar/database",
+    "version": "1.0.0",
+    "main": "index.js",
+    "exports": {
+        ".": "./src/client.ts"
+    },
+    "scripts": {
+        "db:generate": "prisma generate",
+        "db:seed": "tsx src/seed.ts",
+        "typecheck": "tsc -b",
+        "format": "prisma format",
+        "lint": "eslint --ext .ts src --max-warnings 0"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@prisma/client": "^6.6.0"
+    },
+    "devDependencies": {
+        "@basevatar/eslint-config": "*",
+        "@basevatar/typescript-config": "*",
+        "eslint": "^9.23.0",
+        "prisma": "^6.6.0",
+        "typescript": "^5.8.3",
+        "tsx": "^4.19.3"
+    }
+}

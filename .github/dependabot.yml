@@ -1,8 +1,8 @@
 version: 2
 updates:
-    # "/web"
+    # "/apps/web"
     - package-ecosystem: "npm"
-      directory: "/web"
+      directory: "/apps/web"
       schedule:
           interval: "monthly"
           day: "monday"
@@ -28,9 +28,9 @@ updates:
                   - "minor"
                   - "patch"
 
-    # "/cronjob"
+    # "/apps/cronjob"
     - package-ecosystem: "npm"
-      directory: "/cronjob"
+      directory: "/apps/cronjob"
       schedule:
           interval: "monthly"
           day: "monday"
@@ -56,9 +56,9 @@ updates:
                   - "minor"
                   - "patch"
 
-    # "/slack"
+    # "/apps/slack"
     - package-ecosystem: "npm"
-      directory: "/slack"
+      directory: "/apps/slack"
       schedule:
           interval: "monthly"
           day: "monday"
@@ -71,6 +71,62 @@ updates:
       labels:
           - "dependencies"
           - "slack"
+      groups:
+          security-updates:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          minor-updates:
+              applies-to: version-updates
+              patterns:
+                  - "*"
+              update-types:
+                  - "minor"
+                  - "patch"
+
+    # "root"
+    - package-ecosystem: "npm"
+      directory: "/"
+      schedule:
+          interval: "monthly"
+          day: "monday"
+      commit-message:
+          prefix: "chore(root)"
+      reviewers:
+          - "enesyukselx"
+      assignees:
+          - "enesyukselx"
+      labels:
+          - "dependencies"
+          - "root"
+      groups:
+          security-updates:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          minor-updates:
+              applies-to: version-updates
+              patterns:
+                  - "*"
+              update-types:
+                  - "minor"
+                  - "patch"
+
+    # "/packages/prisma"
+    - package-ecosystem: "npm"
+      directory: "/packages/prisma"
+      schedule:
+          interval: "monthly"
+          day: "monday"
+      commit-message:
+          prefix: "chore(database)"
+      reviewers:
+          - "enesyukselx"
+      assignees:
+          - "enesyukselx"
+      labels:
+          - "dependencies"
+          - "database"
       groups:
           security-updates:
               applies-to: security-updates
