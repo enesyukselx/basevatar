@@ -98,9 +98,15 @@ importers:
       '@basevatar/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@basevatar/vitest-config':
+        specifier: workspace:*
+        version: link:../../packages/vitest-config
       '@types/node':
         specifier: ^22.13.16
         version: 22.14.1
+      '@vitest/coverage-istanbul':
+        specifier: ^3.1.1
+        version: 3.1.1(vitest@3.1.1)
       dotenv:
         specifier: ^16.4.7
         version: 16.5.0
@@ -125,6 +131,9 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.1.1(@types/debug@4.1.12)(@types/node@22.14.1)(@vitest/ui@3.1.1)(jiti@1.21.7)(jsdom@26.1.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1)
 
   apps/web:
     dependencies:
@@ -210,6 +219,9 @@ importers:
       '@basevatar/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@basevatar/vitest-config':
+        specifier: workspace:*
+        version: link:../../packages/vitest-config
       '@types/node':
         specifier: ^22.13.11
         version: 22.14.1
@@ -219,6 +231,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.6(@types/react@18.3.20)
+      '@vitest/coverage-istanbul':
+        specifier: ^3.1.1
+        version: 3.1.1(vitest@3.1.1)
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.3)
@@ -246,6 +261,9 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.1.1(@types/debug@4.1.12)(@types/node@22.14.1)(@vitest/ui@3.1.1)(jiti@1.21.7)(jsdom@26.1.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1)
 
   packages/database:
     dependencies:

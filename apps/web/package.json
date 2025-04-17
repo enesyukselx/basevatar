@@ -7,7 +7,10 @@
         "build": "next build",
         "start": "next start",
         "typecheck": "tsc -b",
-        "lint": "next lint"
+        "lint": "next lint",
+        "test": "vitest run",
+        "test:watch": "vitest watch",
+        "test:coverage": "vitest run --coverage"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.772.0",
@@ -39,9 +42,11 @@
     "devDependencies": {
         "@basevatar/database": "workspace:*",
         "@basevatar/typescript-config": "workspace:*",
+        "@basevatar/vitest-config": "workspace:*",
         "@types/node": "^22.13.11",
         "@types/react": "^18",
         "@types/react-dom": "^18",
+        "@vitest/coverage-istanbul": "^3.1.1",
         "autoprefixer": "^10.4.21",
         "eslint": "^9.23.0",
         "eslint-config-next": "15.3.0",
@@ -50,6 +55,7 @@
         "tailwind-bootstrap-grid": "^5.1.0",
         "tailwindcss": "^3.4.15",
         "ts-node": "^10.9.2",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.2",
+        "vitest": "^3.1.1"
     }
 }

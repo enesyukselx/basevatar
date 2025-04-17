@@ -8,7 +8,10 @@
         "start": "node dist/index.cjs",
         "dev": "tsup --watch --onSuccess \"node dist/index.cjs\"",
         "lint": "eslint --ext .ts src",
-        "typecheck": "tsc -b"
+        "typecheck": "tsc -b",
+        "test": "vitest run",
+        "test:watch": "vitest watch",
+        "test:coverage": "vitest run --coverage"
     },
     "author": "",
     "license": "ISC",
@@ -17,7 +20,9 @@
         "@basevatar/database": "workspace:*",
         "@basevatar/eslint-config": "workspace:*",
         "@basevatar/typescript-config": "workspace:*",
+        "@basevatar/vitest-config": "workspace:*",
         "@types/node": "^22.13.16",
+        "@vitest/coverage-istanbul": "^3.1.1",
         "dotenv": "^16.4.7",
         "eslint": "^9.23.0",
         "nodemon": "^3.1.9",
@@ -25,7 +30,8 @@
         "rimraf": "^6.0.1",
         "ts-node": "^10.9.2",
         "tsup": "^8.4.0",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.2",
+        "vitest": "^3.1.1"
     },
     "dependencies": {
         "@slack/bolt": "^4.2.1"
