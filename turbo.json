@@ -25,7 +25,7 @@
             "cache": false
         },
         "typecheck": {
-            "dependsOn": ["db:generate", "^db:generate"]
+            "dependsOn": ["@basevatar/vitest-config#build", "db:generate", "^db:generate"]
         },
         "lint": {
             "dependsOn": []
