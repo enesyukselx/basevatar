@@ -11,7 +11,12 @@
         "db:generate": "turbo run db:generate",
         "db:seed": "turbo db:seed",
         "start": "turbo start",
-        "test": "turbo run test"
+        "test": "turbo run test",
+        "test:watch": "turbo run test:watch",
+        "test:coverage": "turbo run test:coverage",
+        "merge-json-reports": "turbo run merge-json-reports",
+        "report": "turbo run report",
+        "view-report": "turbo run view-report"
     },
     "repository": {
         "type": "git",

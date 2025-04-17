@@ -2,9 +2,9 @@
     "name": "@basevatar/vitest-config",
     "type": "module",
     "exports": {
-        "./base": "./dist/configs/base-config.ts",
-        "./ui": "./dist/configs/ui-config.ts",
-        "./node": "./dist/configs/node-config.ts"
+        "./base": "./dist/configs/base-config.js",
+        "./ui": "./dist/configs/ui-config.js",
+        "./node": "./dist/configs/node-config.js"
     },
     "scripts": {
         "build": "tsc",
@@ -20,6 +20,7 @@
         "glob": "^11.0.1",
         "jsdom": "^26.1.0",
         "nyc": "^17.1.0",
+        "typescript": "^5.8.3",
         "vitest": "^3.1.1"
     }
 }

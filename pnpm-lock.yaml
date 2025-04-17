@@ -309,6 +309,9 @@ importers:
       nyc:
         specifier: ^17.1.0
         version: 17.1.0
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
       vitest:
         specifier: ^3.1.1
         version: 3.1.1(@types/debug@4.1.12)(@types/node@22.14.1)(@vitest/ui@3.1.1)(jiti@1.21.7)(jsdom@26.1.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1)

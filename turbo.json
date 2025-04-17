@@ -37,6 +37,28 @@
             "dependsOn": ["transit", "@basevatar/vitest-config#build"],
             "outputs": ["coverage.json"]
         },
+        "test:watch": {
+            "dependsOn": ["transit", "@basevatar/vitest-config#build"],
+            "cache": false,
+            "persistent": true
+        },
+        "test:coverage": {
+            "dependsOn": ["transit", "@basevatar/vitest-config#build"],
+            "outputs": ["coverage.json"]
+        },
+        "merge-json-reports": {
+            "inputs": ["coverage/raw/**"],
+            "outputs": ["coverage/merged/**"]
+        },
+        "report": {
+            "dependsOn": ["merge-json-reports"],
+            "inputs": ["coverage/merge"],
+            "outputs": ["coverage/report/**"]
+        },
+        "view-report": {
+            "cache": false,
+            "persistent": true
+        },
         "transit": {
             "dependsOn": ["^transit"]
         }

@@ -9,7 +9,9 @@
         "dev": "tsup --watch --onSuccess \"node dist/index.cjs\"",
         "lint": "eslint --ext .ts src",
         "typecheck": "tsc -b",
-        "test": "vitest run"
+        "test": "vitest run",
+        "test:watch": "vitest watch",
+        "test:coverage": "vitest run --coverage"
     },
     "author": "",
     "license": "ISC",

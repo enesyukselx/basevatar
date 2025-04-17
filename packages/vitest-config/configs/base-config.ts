@@ -6,6 +6,7 @@ export const baseConfig = defineConfig({
         coverage: {
             provider: "istanbul",
             reporter: [
+                "text",
                 [
                     "json",
                     {
