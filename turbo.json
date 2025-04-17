@@ -32,6 +32,13 @@
         },
         "clean": {
             "cache": false
+        },
+        "test": {
+            "dependsOn": ["transit", "@basevatar/vitest-config#build"],
+            "outputs": ["coverage.json"]
+        },
+        "transit": {
+            "dependsOn": ["^transit"]
         }
     }
 }

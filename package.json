@@ -10,7 +10,8 @@
         "clean": "turbo clean",
         "db:generate": "turbo run db:generate",
         "db:seed": "turbo db:seed",
-        "start": "turbo start"
+        "start": "turbo start",
+        "test": "turbo run test"
     },
     "repository": {
         "type": "git",
