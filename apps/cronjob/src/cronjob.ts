@@ -1,7 +1,7 @@
 import createImage from "./utils/createImage";
 import { getSettings, getVotes, updateSettingByKey } from "@basevatar/database";
-import { postNewDayMessage } from "./utils/slackHelpers";
 import { serverStatusHelper } from "./utils/serverStatusHelper";
+import postNewDayMessage from "./utils/slack/postNewDayMessage";
 
 export async function cronjob() {
     try {
