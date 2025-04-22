@@ -45,7 +45,7 @@ describe("voteCommand", () => {
         expect(createVoteSpy).toHaveBeenCalledWith({
             type: "theme",
             value: "cyberpunk",
-            day: 7, // day + 2 (5 + 2)
+            day: 7, // if day is not provided, set it to day + 2
         });
         const sayMessage = mockContext.say.mock.calls[0][0];
         expect(sayMessage).toContain("*Theme:* cyberpunk");

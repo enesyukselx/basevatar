@@ -16,6 +16,7 @@ const voteCommand = async () => {
             return;
         }
         const { day } = settings;
+        // if vote day is not provided, set it to day + 2
         const voteDay = voteDayValue ?? (day ? +day + 2 : undefined);
 
         if (voteType !== "color" && voteType !== "theme") {
