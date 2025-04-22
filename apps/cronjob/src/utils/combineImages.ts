@@ -79,12 +79,13 @@ const combineImages = async (day: number) => {
         .toFile(outputPath);
 
     // Clean up uploads directory
-    try {
-        await fs.rm(uploadDir, { recursive: true, force: true });
-        console.log("Uploads directory cleaned successfully after combining.");
-    } catch (err) {
-        console.error("Error removing uploads directory:", err);
-    }
+    fs.rm(uploadDir, { recursive: true, force: true }, (err) => {
+        if (err) {
+            console.error("Error removing uploads directory:", err);
+        } else {
+            console.log("Uploads directory cleaned successfully after combining.");
+        }
+    });
 
     // Upload combined image to server
     try {
