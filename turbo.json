@@ -34,7 +34,7 @@
             "cache": false
         },
         "test": {
-            "dependsOn": ["transit", "@basevatar/vitest-config#build"],
+            "dependsOn": ["^db:generate", "transit", "@basevatar/vitest-config#build"],
             "outputs": ["coverage.json"]
         },
         "test:watch": {
