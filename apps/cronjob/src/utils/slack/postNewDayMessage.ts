@@ -1,5 +1,5 @@
 import { WebClient } from "@slack/web-api";
-import { cronjobConservationId } from "../../config";
+import { cronjobConversationId } from "../../config";
 const token = process.env.SLACK_BOT_TOKEN;
 
 const postNewDayMessage = async (day: number, finishTime: number, color: string, theme: string) => {
@@ -12,10 +12,10 @@ const postNewDayMessage = async (day: number, finishTime: number, color: string,
 *Colors:* ${color}
 *Theme:* ${theme}
             `,
-            channel: cronjobConservationId,
+            channel: cronjobConversationId,
         });
 
-        console.log(`Successfully send message ${result.ts} in conversation ${cronjobConservationId}`);
+        console.log(`Successfully send message ${result.ts} in conversation ${cronjobConversationId}`);
     } catch (e) {
         console.error(e);
     }
