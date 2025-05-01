@@ -34,12 +34,12 @@
     "homepage": "https://github.com/enesyukselx/basevatar#readme",
     "description": "",
     "devDependencies": {
-        "prisma": "^6.6.0",
-        "turbo": "^2.5.0",
-        "vitest": "^3.1.1"
+        "prisma": "^6.7.0",
+        "turbo": "^2.5.2",
+        "vitest": "^3.1.2"
     },
     "dependencies": {
-        "@prisma/client": "^6.6.0"
+        "@prisma/client": "^6.7.0"
     },
     "packageManager": "pnpm@10.8.1"
 }
