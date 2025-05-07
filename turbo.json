@@ -61,6 +61,15 @@
         },
         "transit": {
             "dependsOn": ["^transit"]
+        },
+        "contracts:compile": {
+            "cache": false
+        },
+        "contracts:deploy": {
+            "cache": false
+        },
+        "contracts:mint": {
+            "cache": false
         }
     }
 }
