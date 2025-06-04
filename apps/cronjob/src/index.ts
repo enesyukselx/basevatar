@@ -11,7 +11,6 @@ cron.schedule(
         cronjob();
     },
     {
-        scheduled: true,
         timezone: process.env.TIMEZONE || "Etc/UTC",
     }
 );
