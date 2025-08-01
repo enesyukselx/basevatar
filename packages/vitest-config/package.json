@@ -15,13 +15,13 @@
     },
     "devDependencies": {
         "@basevatar/typescript-config": "workspace:*",
-        "@vitejs/plugin-react": "^4.6.0",
+        "@vitejs/plugin-react": "^4.7.0",
         "@vitest/coverage-istanbul": "^3.2.4",
         "@vitest/ui": "^3.2.4",
         "glob": "^11.0.3",
         "jsdom": "^26.1.0",
         "nyc": "^17.1.0",
-        "typescript": "^5.8.3",
+        "typescript": "^5.9.2",
         "vite-tsconfig-paths": "^5.1.4",
         "vitest": "^3.2.4"
     }
