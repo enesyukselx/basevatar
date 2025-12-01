@@ -38,7 +38,7 @@
     "description": "",
     "devDependencies": {
         "prisma": "^6.10.1",
-        "turbo": "^2.5.4",
+        "turbo": "^2.6.1",
         "vitest": "^3.2.4"
     },
     "dependencies": {
